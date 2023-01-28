@@ -17,11 +17,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hola"
+        android:layout_width="23dp"
+        android:layout_height="11dp"
+        android:text="Hola - commit"
         tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="141dp" />
+        tools:layout_editor_absoluteY="149dp" />
 
     <TextView
         android:id="@+id/textView2"
