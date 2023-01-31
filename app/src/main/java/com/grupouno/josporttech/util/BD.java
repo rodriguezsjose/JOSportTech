@@ -1,4 +1,4 @@
-package util;
+package com.grupouno.josporttech.util;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
