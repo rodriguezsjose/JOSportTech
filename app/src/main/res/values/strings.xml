@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">JOSportTech</string>
+    <string-array name="centros">
+        <item>Centro 1</item>
+        <item>Centro 2</item>
+        <item>Centro 3</item>
+        <item>Centro 4</item>
+        <item>Centro 5</item>
+    </string-array>
 </resources>
