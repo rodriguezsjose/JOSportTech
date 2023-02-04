@@ -5,6 +5,9 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.grupouno.josporttech.entidad.Reclamo;
+import com.grupouno.josporttech.modelo.DAOReclamo;
+
 public class ActivityDetalleReclamo extends AppCompatActivity {
     EditText txtPeticion, txtcodReserva, txtfechaReserva, txtCD, txtMedio, txtContacto, txtCorreo, txtMotivo, txtDescripcion, txtArchivoSustento;
     Boolean registro = true;

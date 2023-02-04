@@ -8,8 +8,9 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.plecca.proy6.reclamo.DAOReclamo;
-import com.plecca.proy6.reclamo.Reclamo;
+import com.grupouno.josporttech.entidad.Reclamo;
+import com.grupouno.josporttech.modelo.DAOReclamo;
+
 
 public class Reclamo_Activity extends AppCompatActivity {
     EditText txtPeticion, txtcodReserva, txtfechaReserva, txtCD, txtMedio, txtContacto, txtCorreo, txtMotivo, txtDescripcion, txtArchivoSustento;

@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.grupouno.josporttech.adaptador.AdaptadorRec;
+import com.grupouno.josporttech.entidad.Reclamo;
+import com.grupouno.josporttech.modelo.DAOReclamo;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,7 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.plecca.proy6.BD;
+import com.grupouno.josporttech.entidad.Reclamo;
+import com.grupouno.josporttech.util.BD;
 
 import java.util.ArrayList;
 import java.util.List;

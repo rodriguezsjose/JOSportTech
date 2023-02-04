@@ -11,10 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.plecca.proy6.R;
+
+import com.grupouno.josporttech.ActivityDetalleReclamo;
+import com.grupouno.josporttech.R;
+import com.grupouno.josporttech.entidad.Reclamo;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class AdaptadorRec extends RecyclerView.Adapter<AdaptadorRec.MyViewHolder> {
     private Context c;
