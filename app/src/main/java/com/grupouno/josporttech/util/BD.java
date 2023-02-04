@@ -65,7 +65,75 @@ public BD(Context c){
                         " sustento TEXT NOT NULL);";
         sqLiteDatabase.execSQL(query3);
 
+        String queryCreateCentro =
+                "CREATE TABLE centro "+
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        " nombre TEXT NOT NULL, " +
+                        " descripcion TEXT, " +
+                        " idProveedor INTEGER NOT NULL, " +
+                        " horaIni TEXT NOT NULL, " +
+                        " horaFin TEXT NOT NULL ); ";
+        sqLiteDatabase.execSQL(queryCreateCentro);
 
+        String queryCreateSede =
+                "CREATE TABLE sede "+
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                        " nombre TEXT NOT NULL, "+
+                        " descripcion TEXT, "+
+                        " ubigeo TEXT NOT NULL, "+
+                        " latitud TEXT, "+
+                        " longitud TEXT, "+
+                        " idCentro INTEGER NOT NULL ); ";
+        sqLiteDatabase.execSQL(queryCreateSede);
+
+        String queryCreateDeporte =
+                "CREATE TABLE deporte "+
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                        " nombre TEXT NOT NULL, "+
+                        " descripcion TEXT); ";
+        sqLiteDatabase.execSQL(queryCreateDeporte);
+
+        String queryCreateHorario =
+                "CREATE TABLE horario "+
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                        " idSede INTEGER NOT NULL, "+
+                        " idDeporte INTEGER NOT NULL, "+
+                        " fechaIni TEXT NOT NULL, "+
+                        " horaIni TEXT NOT NULL, "+
+                        " fechaFin TEXT NOT NULL,"+
+                        " horaFin TEXT NOT NULL,"+
+                        " cantidad INTEGER NOT NULL, "+
+                        " aforo INTEGER NOT NULL, "+
+                        " disponibilidad INTEGER NOT NULL); ";
+        sqLiteDatabase.execSQL(queryCreateHorario);
+
+        String queryCreateMotivoAnulacion =
+                "CREATE TABLE motivoAnulacion "+
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                        " nombre TEXT NOT NULL, "+
+                        " descripcion TEXT); ";
+        sqLiteDatabase.execSQL(queryCreateMotivoAnulacion);
+
+        String queryCreateReserva =
+                "CREATE TABLE reserva "+
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                        " idSede INTEGER NOT NULL, "+
+                        " idDeporte INTEGER NOT NULL, "+
+                        " idHorario INTEGER NOT NULL, "+
+                        " fecha TEXT NOT NULL, "+
+                        " hora TEXT NOT NULL, "+
+                        " estado TEXT NOT NULL, "+
+                        " flagPagado INTEGER NOT NULL, "+
+                        " cantReprogramaciones INTEGER NOT NULL, "+
+                        " idMotivoAnulacion INTEGER); ";
+        sqLiteDatabase.execSQL(queryCreateReserva);
+
+        String queryCreatePago =
+                "CREATE TABLE pago "+
+                        " (id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                        " idReserva INTEGER, "+
+                        " fecha TEXT NOT NULL); ";
+        sqLiteDatabase.execSQL(queryCreatePago);
 
 
 
