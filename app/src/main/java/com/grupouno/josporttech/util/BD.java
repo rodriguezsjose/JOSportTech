@@ -13,6 +13,19 @@ public BD(Context c){
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+
+    String query_user =
+            "CREATE TABLE usr "+
+                    "(id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    " nombres TEXT NOT NULL, "+
+                    " apellidos TEXT NOT NULL, "+
+                    " fec_nacimiento TEXT NOT NULL, "+
+                    " id_genero INTEGER NOT NULL, "+
+                    " perfil TEXT NOT NULL, "+
+                    " correo TEXT NOT NULL, "+
+                    " password TEXT NOT NULL);";
+    sqLiteDatabase.execSQL(query_user);
+
     String query =
             "CREATE TABLE tablaprueba "+
                     "(id INTEGER PRIMARY KEY AUTOINCREMENT, "+

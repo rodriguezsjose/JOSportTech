@@ -70,4 +70,17 @@ public class DAOSede {
         }
     }
 
+    public List<Sede> listarSedes(){
+        List<Sede> listaSedes = new ArrayList<>();
+        try{
+            Cursor c = db.rawQuery("SELECT * FROM sede",null);
+            while(c.moveToNext()){
+                listaSedes.add(new Sede(c.getInt(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6)));
+            }
+        }catch (Exception e){
+            Log.d("=>",e.getMessage());
+        }
+        return listaSedes;
+    }
+
 }
