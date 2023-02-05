@@ -1,13 +1,17 @@
 package com.grupouno.josporttech;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +36,10 @@ public class Reclamo_Activity extends AppCompatActivity {
     Spinner spRec;
     DAOReserva dRes = new DAOReserva(this);
     List<Reserva> listaRes;
+    ImageView imgV;
+    ImageButton imbut;
+
+
     private BaseAdapter badap = new BaseAdapter() {
         @Override
         public int getCount() {
@@ -85,13 +93,45 @@ public class Reclamo_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reclamo);
         asignarReferencias();
+        imbut = findViewById(R.id.btnimg);
+        imgV = findViewById(R.id.fotoImg);
 
+
+
+        imbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                abrirCam();
+            }
+        });
+
+
+    }
+
+    private  void abrirCam(){
+        Intent inte = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // if (inte.resolveActivity(getPackageManager())!=null){
+
+        startActivityForResult(inte, 1);
+        //}
+
+    }
+    protected void onActivityResult(int    reqCode, int resultCode, Intent data) {
+        super.onActivityResult(reqCode, resultCode, data);
+        if (reqCode == 1 && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imgbmap = (Bitmap) extras.get("data");
+            imgV.setImageBitmap(imgbmap);
+        }
 
     }
 
 
     private void asignarReferencias() {
-        txtPeticion = findViewById(R.id.txtPet);
+  txtPeticion = findViewById(R.id.txtPet);
+
+
         txtcodReserva = findViewById(R.id.txtCodRes);
         txtfechaReserva = findViewById(R.id.txtFec);
         txtCD = findViewById(R.id.txtCDe);
@@ -107,7 +147,7 @@ public class Reclamo_Activity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int idRes= ((Reserva) parent.getSelectedItem()).getId();
-                Toast.makeText(Reclamo_Activity.this, "Seleccionado idres"+idRes, Toast.LENGTH_SHORT).show();
+                Toast.makeText(Reclamo_Activity.this, "Seleccionado "+idRes, Toast.LENGTH_SHORT).show();
                 String centro = ((Reserva) parent.getSelectedItem()).getDescCentro();
                 txtCD.setText(centro);
 
