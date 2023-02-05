@@ -57,11 +57,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
         <activity
@@ -98,6 +94,30 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+
+        <activity
+            android:name=".ActivityListarReclamo"
+            android:exported="true"
+            android:label="Listado de Reclamos">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <activity
+            android:name=".Reclamo_Activity"
+            android:exported="true"
+            android:label="Registre un nuevo reclamo">
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" />
     </application>
 
 </manifest>
