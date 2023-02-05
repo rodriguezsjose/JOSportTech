@@ -119,6 +119,17 @@
             android:name="android.app.lib_name"
             android:value="" />
         </activity>
+
+        <activity
+            android:name=".ActivityDetalleReclamo"
+            android:exported="true"
+            android:label="Detalle de su reclamo elegido">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
     </application>
 
 </manifest>
