@@ -130,8 +130,6 @@ public class Reclamo_Activity extends AppCompatActivity {
 
     private void asignarReferencias() {
   txtPeticion = findViewById(R.id.txtPet);
-
-
         txtcodReserva = findViewById(R.id.txtCodRes);
         txtfechaReserva = findViewById(R.id.txtFec);
         txtCD = findViewById(R.id.txtCDe);
@@ -150,6 +148,10 @@ public class Reclamo_Activity extends AppCompatActivity {
                 Toast.makeText(Reclamo_Activity.this, "Seleccionado "+idRes, Toast.LENGTH_SHORT).show();
                 String centro = ((Reserva) parent.getSelectedItem()).getDescCentro();
                 txtCD.setText(centro);
+
+                String codRese = ((Reserva) parent.getSelectedItem()).getDescCentro();
+                txtcodReserva.setText(codRese);
+
 
             }
 
