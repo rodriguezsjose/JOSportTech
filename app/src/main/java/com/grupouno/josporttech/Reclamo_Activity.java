@@ -92,9 +92,11 @@ public class Reclamo_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reclamo);
+
         asignarReferencias();
         imbut = findViewById(R.id.btnimg);
         imgV = findViewById(R.id.fotoImg);
+
 
 
 
@@ -140,18 +142,23 @@ public class Reclamo_Activity extends AppCompatActivity {
         txtDescripcion = findViewById(R.id.txtDesc);
         txtArchivoSustento = findViewById(R.id.txtAdj);
         spRec = findViewById(R.id.idSpinnerReserva);
+
         cargarSpinnerReserva();
+
         spRec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 int idRes= ((Reserva) parent.getSelectedItem()).getId();
                 Toast.makeText(Reclamo_Activity.this, "Seleccionado "+idRes, Toast.LENGTH_SHORT).show();
+
                 String centro = ((Reserva) parent.getSelectedItem()).getDescCentro();
                 txtCD.setText(centro);
 
-                String codRese = ((Reserva) parent.getSelectedItem()).getDescCentro();
+                String codRese = ((Reserva) parent.getSelectedItem()).getDescDeporte();
                 txtcodReserva.setText(codRese);
 
+                String fecha = ((Reserva) parent.getSelectedItem()).getFecha();
+                txtfechaReserva.setText(fecha);
 
             }
 
@@ -208,6 +215,7 @@ public class Reclamo_Activity extends AppCompatActivity {
         String motivo = txtMotivo.getText().toString();
         String descMotivo = txtDescripcion.getText().toString();
         String sustento = txtArchivoSustento.getText().toString();
+
 
 
         if (peticion.equals("")){
