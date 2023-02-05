@@ -2,14 +2,26 @@ package com.grupouno.josporttech;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.grupouno.josporttech.entidad.Reclamo;
+import com.grupouno.josporttech.entidad.Reserva;
 import com.grupouno.josporttech.modelo.DAOReclamo;
+import com.grupouno.josporttech.modelo.DAOReserva;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Reclamo_Activity extends AppCompatActivity {
@@ -17,6 +29,56 @@ public class Reclamo_Activity extends AppCompatActivity {
     Button btnRegitrar;
     Reclamo reclamo;
     DAOReclamo daoReclamo = new DAOReclamo(this);
+    Spinner spRec;
+    DAOReserva dRes = new DAOReserva(this);
+    List<Reserva> listaRes;
+    private BaseAdapter badap = new BaseAdapter() {
+        @Override
+        public int getCount() {
+            return listaRes.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return listaRes.get(position);
+
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            ReservaHolder holder;
+            View reservaView=convertView;
+            if (reservaView==null){
+                reservaView=getLayoutInflater().inflate(R.layout.fila_spinner_reserva, parent, false);
+                holder=new ReservaHolder();
+                holder.txtCod = reservaView.findViewById(R.id.txtCod);
+                holder.txtDescCombo = reservaView.findViewById(R.id.txtDescCombo);
+                reservaView.setTag(holder);
+            }
+            else {
+                holder = (ReservaHolder) reservaView.getTag();
+            }
+
+
+            Reserva reserva = listaRes.get(position);
+
+            holder.txtCod.setText(String.valueOf(reserva.getId()));
+            holder.txtDescCombo.setText(String.valueOf(reserva.getId()));
+            holder.txtCod.setVisibility(View.INVISIBLE);
+
+            return reservaView;
+
+        }
+        class ReservaHolder {
+            private TextView txtCod, txtDescCombo;
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +101,25 @@ public class Reclamo_Activity extends AppCompatActivity {
         txtMotivo = findViewById(R.id.txtMot);
         txtDescripcion = findViewById(R.id.txtDesc);
         txtArchivoSustento = findViewById(R.id.txtAdj);
+        spRec = findViewById(R.id.idSpinnerReserva);
+        cargarSpinnerReserva();
+        spRec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                int idRes= ((Reserva) parent.getSelectedItem()).getId();
+                Toast.makeText(Reclamo_Activity.this, "Seleccionado idres"+idRes, Toast.LENGTH_SHORT).show();
+                String centro = ((Reserva) parent.getSelectedItem()).getDescCentro();
+                txtCD.setText(centro);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         btnRegitrar = findViewById(R.id.btnRgst);
         btnRegitrar.setOnClickListener(v ->{
@@ -52,15 +133,22 @@ public class Reclamo_Activity extends AppCompatActivity {
         } );
 
 
-    }
 
+
+    }
+    public void cargarSpinnerReserva() {
+        dRes.abrirBD();
+        listaRes= new ArrayList<>();
+        listaRes = dRes.obtenerListaReserva("ACTIVO");
+        spRec.setAdapter(badap);
+    }
     private void mostrarMensaje(String mensaje) {
         AlertDialog.Builder ventana = new AlertDialog.Builder(this);
         ventana.setTitle("MENSAJE INF");
         ventana.setMessage(mensaje);
         ventana.setPositiveButton("Aceptar", (dialog, which) -> {
-            Intent in = new Intent(this, ActivityListarReclamo.class);
-            startActivity(in);
+                    Intent in = new Intent(this, ActivityListarReclamo.class);
+                    startActivity(in);
                 }
         );
         ventana.create().show();
