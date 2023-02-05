@@ -1,8 +1,8 @@
 package com.grupouno.josporttech.entidad;
 
 public class Reserva {
-    private int id, idSede, idDeporte, idHorario, flagPagado, cantReprogramaciones, idMotivoAnulacion;
-    private String estado, fecha, hora;
+    private int id, idSede, idDeporte, idHorario, flagPagado, cantReprogramaciones, idMotivoAnulacion, idCentro;
+    private String estado, fecha, hora, descCentro, descDeporte, descSede;
 
     public Reserva(int idSede, int idDeporte, int idHorario, String fecha, String hora, String estado, int flagPagado, int cantReprogramaciones, int idMotivoAnulacion) {
         this.idSede = idSede;
@@ -40,6 +40,20 @@ public class Reserva {
         this.idMotivoAnulacion = idMotivoAnulacion;
         this.fecha = fecha;
         this.hora = hora;
+    }
+    public Reserva(int id, int idCentro, String descCentro, int idSede, String descSede, int idDeporte, String descDeporte, String fecha, String hora, String estado, int flagPagado, int cantReprogramaciones){
+        this.id = id;
+        this.idCentro = idCentro;
+        this.descCentro = descCentro;
+        this.idSede = idSede;
+        this.descSede = descSede;
+        this.idDeporte = idDeporte;
+        this.descDeporte = descDeporte;
+        this.fecha = fecha;
+        this.hora = hora;
+        this.flagPagado = flagPagado;
+        this.cantReprogramaciones = cantReprogramaciones;
+        this.idMotivoAnulacion = idMotivoAnulacion;
     }
 
     public int getId() {
@@ -121,5 +135,38 @@ public class Reserva {
     public void setHora(String hora) {
         this.hora = hora;
     }
+
+    public String getDescCentro() {
+        return descCentro;
+    }
+
+    public void setDescCentro(String descCentro) {
+        this.descCentro = descCentro;
+    }
+
+    public String getDescDeporte() {
+        return descDeporte;
+    }
+
+    public void setDescDeporte(String descDeporte) {
+        this.descDeporte = descDeporte;
+    }
+
+    public int getIdCentro() {
+        return idCentro;
+    }
+
+    public void setIdCentro(int idCentro) {
+        this.idCentro = idCentro;
+    }
+
+    public String getDescSede() {
+        return descSede;
+    }
+
+    public void setDescSede(String descSede) {
+        this.descSede = descSede;
+    }
 }
+
 

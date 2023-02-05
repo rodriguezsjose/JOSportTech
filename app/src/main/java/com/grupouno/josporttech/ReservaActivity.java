@@ -433,8 +433,8 @@ public class ReservaActivity extends AppCompatActivity {
         ventana.setTitle("Mensaje Informativo");
         ventana.setMessage(mensaje);
         ventana.setPositiveButton("Aceptar",(dialogInterface,i) -> {
-            //Intent intent = new Intent(this, ListarActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(this, TabReservaActivity.class);
+            startActivity(intent);
         });
         ventana.create().show();
     }
