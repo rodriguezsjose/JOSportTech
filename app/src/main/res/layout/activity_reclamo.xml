@@ -13,12 +13,12 @@
         android:id="@+id/btnimg"
         android:layout_width="69dp"
         android:layout_height="59dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="88dp"
         android:src="@drawable/ic_cam2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/txtAdj"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintStart_toEndOf="@+id/fotoImg" />
 
     <Button
         android:id="@+id/btnRgst"
@@ -202,7 +202,7 @@
         android:id="@+id/txtFec"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:ems="10"
@@ -304,13 +304,15 @@
         android:gravity="center"
         android:hint="Petición"
         android:inputType="textPersonName"
-        android:text="RECLAMO"
+
         android:textAlignment="gravity"
         android:textColor="#0E0101"
         android:textColorHint="#120101"
         android:textSize="13sp"
         android:textStyle="italic"
         android:visibility="invisible"
+        android:text="RECLAMO"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -357,16 +359,19 @@
         android:id="@+id/txtAdj"
         android:layout_width="85dp"
         android:layout_height="52dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="276dp"
         android:ems="10"
         android:fontFamily="@font/tres"
         android:gravity="center"
         android:hint="Adjunto"
         android:inputType="textPersonName"
-        android:textSize="13sp"
-        android:textStyle="italic"
+        android:text="ADJUNTO"
         android:textColor="#070000"
         android:textColorHint="#1B0202"
+        android:textSize="13sp"
+        android:textStyle="italic"
+        android:visibility="invisible"
+
         app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -375,19 +380,19 @@
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:ems="10"
         android:fontFamily="@font/tres"
         android:gravity="center"
         android:hint="Descripción"
         android:inputType="textPersonName"
-        android:textSize="13sp"
-        android:textStyle="italic"
         android:textColor="#070000"
         android:textColorHint="#1B0202"
-        app:layout_constraintBottom_toTopOf="@+id/txtAdj"
+        android:textSize="13sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtMot"
-        app:layout_constraintVertical_bias="0.738" />
+        app:layout_constraintTop_toBottomOf="@+id/txtMot" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -430,11 +435,12 @@
         android:id="@+id/fotoImg"
         android:layout_width="74dp"
         android:layout_height="80dp"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintVertical_bias="0.515"
         tools:srcCompat="@tools:sample/avatars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
