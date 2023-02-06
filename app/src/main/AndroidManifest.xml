@@ -25,11 +25,13 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <meta-data
@@ -74,7 +76,6 @@
         <activity
             android:name=".TabReservaActivity"
             android:exported="true">
-
             <!--
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,7 +89,8 @@
         </activity>
         <activity
             android:name=".ReservaActivity"
-            android:exported="true">
+            android:exported="true"
+            android:parentActivityName=".TabReservaActivity">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

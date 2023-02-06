@@ -1,10 +1,14 @@
 package com.grupouno.josporttech;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -320,6 +324,33 @@ public class ReservaActivity extends AppCompatActivity {
         cargarHorarios();
         asignarReferencias();
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if(getIntent().hasExtra("p_id")){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.reserva_menu,menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.mreserva_reprogramar:
+                Toast.makeText(this, "Reprogramar", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.mreserva_pagar:
+                Toast.makeText(this,"Pagar", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.mreserva_anular:
+                Toast.makeText(this, "Anular",Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void asignarReferencias(){
         sprCentro = findViewById(R.id.sprCentro);
         sprSede = findViewById(R.id.sprSede);

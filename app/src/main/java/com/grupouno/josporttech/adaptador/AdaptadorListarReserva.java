@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.grupouno.josporttech.R;
@@ -42,12 +43,27 @@ public class AdaptadorListarReserva extends RecyclerView.Adapter<AdaptadorListar
         holder.filaDeporte.setText(listaReserva.get(position).getDescDeporte());
         holder.filaFecha.setText(listaReserva.get(position).getFecha());
         holder.filaHora.setText(listaReserva.get(position).getHora());
+        holder.btnEditar.setVisibility(View.INVISIBLE);
         holder.btnEditar.setOnClickListener(view -> {
             Intent intent = new Intent(context, ReservaActivity.class);
             intent.putExtra("p_id", listaReserva.get(position).getId()+"");
             intent.putExtra("p_idCentro", listaReserva.get(position).getIdCentro()+"");
             intent.putExtra("p_idSede", listaReserva.get(position).getIdSede()+"");
             intent.putExtra("p_idDeporte", listaReserva.get(position).getIdDeporte()+"");
+            intent.putExtra("p_fecha", listaReserva.get(position).getFecha()+"");
+            intent.putExtra("p_hora", listaReserva.get(position).getHora()+"");
+            context.startActivity(intent);
+        });
+        holder.cvReserva.setOnClickListener(view -> {
+            //Toast.makeText(view.getContext(), "Prueba", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, ReservaActivity.class);
+            intent.putExtra("p_id", listaReserva.get(position).getId()+"");
+            intent.putExtra("p_idCentro", listaReserva.get(position).getIdCentro()+"");
+            intent.putExtra("p_descCentro", listaReserva.get(position).getDescCentro()+"");
+            intent.putExtra("p_idSede", listaReserva.get(position).getIdSede()+"");
+            intent.putExtra("p_descSede", listaReserva.get(position).getDescSede()+"");
+            intent.putExtra("p_idDeporte", listaReserva.get(position).getIdDeporte()+"");
+            intent.putExtra("p_descDeporte", listaReserva.get(position).getDescDeporte()+"");
             intent.putExtra("p_fecha", listaReserva.get(position).getFecha()+"");
             intent.putExtra("p_hora", listaReserva.get(position).getHora()+"");
             context.startActivity(intent);
@@ -62,6 +78,7 @@ public class AdaptadorListarReserva extends RecyclerView.Adapter<AdaptadorListar
     public class MyViewHolder extends RecyclerView.ViewHolder{
         TextView filaCentro, filaDeporte, filaFecha, filaHora;
         ImageButton btnEditar;
+        CardView cvReserva;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             filaCentro = itemView.findViewById(R.id.filaCentro);
@@ -69,6 +86,7 @@ public class AdaptadorListarReserva extends RecyclerView.Adapter<AdaptadorListar
             filaFecha = itemView.findViewById(R.id.filaFecha);
             filaHora = itemView.findViewById(R.id.filaHora);
             btnEditar = itemView.findViewById(R.id.btnEditar);
+            cvReserva = itemView.findViewById(R.id.cvReserva);
         }
     }
 }
