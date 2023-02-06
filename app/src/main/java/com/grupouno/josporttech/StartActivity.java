@@ -39,8 +39,8 @@ public class StartActivity extends AppCompatActivity {
     private void registrarUsuarios(){
         _daoUsuario.abrirBD();
         String msgu = "";
-        msgu = _daoUsuario.registrarUsuario(new Usuario("Jose","Olaya PE","1782-07-28",0,"user","usr01@gob.pe", "1234"));
-        msgu = _daoUsuario.registrarUsuario(new Usuario("Gladys","Tejada","1985-09-30",1,"user","usr02@gob.pe", "6789"));
+        msgu = _daoUsuario.registrarUsuario(new Usuario("Jose","Olaya PE","1782-07-28",0,"user","jolaya@gob.pe", "1234"));
+        msgu = _daoUsuario.registrarUsuario(new Usuario("Gladys","Tejada","1985-09-30",1,"user","gtejada@gob.pe", "6789"));
         _daoDeporte.abrirBD();
         String msgd = "";
         msgd = _daoDeporte.registrarDeporte(new Deporte(101,"Fulbito","campo 7vs7"));
@@ -125,7 +125,7 @@ public class StartActivity extends AppCompatActivity {
         ventana.setTitle("Mensaje Informativo");
         ventana.setMessage(mensaje);
         ventana.setPositiveButton("Aceptar",(dialogInterface, i) -> {
-            Intent intent = new Intent(this, DeporteListarActivity.class);
+            Intent intent = new Intent(this, Expo1Activity.class);
             startActivity(intent);
         });
         ventana.create().show();

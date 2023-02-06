@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Expo1Activity extends AppCompatActivity {
 
-    Button _btnPriscilla, _btnJose, _btnCSC;
+    Button _btnReclamo, _btnReserva, _btnDeportes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,20 +19,20 @@ public class Expo1Activity extends AppCompatActivity {
     }
 
     private void asignarReferencias(){
-        _btnPriscilla = findViewById(R.id.btnPriscilla);
-        _btnJose = findViewById(R.id.btnJose);
-        _btnCSC = findViewById(R.id.btnCSC);
+        _btnReclamo = findViewById(R.id.btnReclamo);
+        _btnReserva = findViewById(R.id.btnReserva);
+        _btnDeportes = findViewById(R.id.btnDeporte);
         ///
-        _btnPriscilla.setOnClickListener(view -> {
+        _btnReclamo.setOnClickListener(view -> {
             Intent intent = new Intent(this, ActivityListarReclamo.class);
             startActivity(intent);
         });
-        _btnJose.setOnClickListener(view -> {
+        _btnReserva.setOnClickListener(view -> {
             Intent intent = new Intent(this, TabReservaActivity.class);
             startActivity(intent);
         });
-        _btnCSC.setOnClickListener(view -> {
-            Intent intent = new Intent(this, StartActivity.class);
+        _btnDeportes.setOnClickListener(view -> {
+            Intent intent = new Intent(this, DeporteListarActivity.class);
             startActivity(intent);
         });
 

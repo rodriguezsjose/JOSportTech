@@ -11,7 +11,7 @@
         android:id="@+id/lblTitulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="   EXPO 1ER AVANCE"
+        android:text="   MENU"
         android:textColor="@color/white"
         android:background="#3F51B5"
         android:textSize="22dp"
@@ -21,36 +21,37 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/btnPriscilla"
+        android:id="@+id/btnDeporte"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="32dp"
-        android:text="Priscilla"
+        android:text="Deportes"
         android:background="@color/cardview_light_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblTitulo" />
 
     <Button
-        android:id="@+id/btnJose"
+        android:id="@+id/btnReserva"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
-        android:text="José"
+        android:text="Reserva"
         android:background="@color/cardview_light_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnPriscilla" />
+        app:layout_constraintTop_toBottomOf="@+id/btnDeporte" />
 
     <Button
-        android:id="@+id/btnCSC"
+        android:id="@+id/btnReclamo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
-        android:text="Cristian"
+        android:text="Reclamo"
         android:background="@color/cardview_light_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnJose" />
+        app:layout_constraintTop_toBottomOf="@+id/btnReserva" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
