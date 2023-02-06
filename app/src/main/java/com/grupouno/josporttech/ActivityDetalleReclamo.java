@@ -29,12 +29,12 @@ public class ActivityDetalleReclamo extends AppCompatActivity {
         txtcodReserva.setText(getIntent().getStringExtra("p_res"));
         txtfechaReserva.setText(getIntent().getStringExtra("p_fec"));
         txtCD.setText(getIntent().getStringExtra("p_ced"));
-        txtMedio.setText(getIntent().getStringExtra("p_med"));
-        txtContacto.setText(getIntent().getStringExtra("p_con"));
+        //txtMedio.setText(getIntent().getStringExtra("p_med"));
+        //txtContacto.setText(getIntent().getStringExtra("p_con"));
         txtCorreo.setText(getIntent().getStringExtra("p_cor"));
         txtMotivo.setText(getIntent().getStringExtra("p_mot"));
         txtDescripcion.setText(getIntent().getStringExtra("p_des"));
-        txtArchivoSustento.setText(getIntent().getStringExtra("p_sus"));
+        //txtArchivoSustento.setText(getIntent().getStringExtra("p_sus"));
 
         }
 
@@ -44,12 +44,12 @@ public class ActivityDetalleReclamo extends AppCompatActivity {
             txtcodReserva = findViewById(R.id.txtCodRes);
             txtfechaReserva = findViewById(R.id.txtFec);
             txtCD = findViewById(R.id.txtCDe);
-            txtMedio = findViewById(R.id.txtTel);
-            txtContacto = findViewById(R.id.txtCont);
+            //txtMedio = findViewById(R.id.txtTel);
+            //txtContacto = findViewById(R.id.txtCont);
             txtCorreo = findViewById(R.id.txtCor);
             txtMotivo = findViewById(R.id.txtMot);
             txtDescripcion = findViewById(R.id.txtDesc);
-            txtArchivoSustento = findViewById(R.id.txtAdj);
+         //   txtArchivoSustento = findViewById(R.id.txtAdj);
 
 
 

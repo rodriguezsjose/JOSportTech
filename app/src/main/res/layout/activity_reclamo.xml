@@ -202,9 +202,7 @@
         android:id="@+id/txtFec"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
         android:ems="10"
         android:enabled="false"
         android:fontFamily="@font/tres"
@@ -216,14 +214,13 @@
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/txtCDe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCodRes" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
         android:id="@+id/txtCDe"
         android:layout_width="170dp"
         android:layout_height="35dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="10dp"
         android:ems="10"
         android:enabled="false"
         android:fontFamily="@font/tres"
@@ -248,10 +245,10 @@
         android:gravity="center"
         android:hint="Correo"
         android:inputType="textPersonName"
+        android:textColor="#070000"
+        android:textColorHint="#1B8A9E"
         android:textSize="13sp"
         android:textStyle="italic"
-        android:textColor="#070000"
-        android:textColorHint="#1B0202"
         app:layout_constraintBottom_toTopOf="@+id/txtMot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCont" />
@@ -260,17 +257,16 @@
         android:id="@+id/txtCont"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:fontFamily="@font/tres"
         android:gravity="center"
         android:hint="Contacto"
         android:inputType="textPersonName"
+        android:textColor="#070000"
+        android:textColorHint="#1B8A9E"
         android:textSize="13sp"
         android:textStyle="italic"
-        android:textColor="#070000"
-        android:textColorHint="#1B0202"
         app:layout_constraintBottom_toTopOf="@+id/txtCor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTel" />
@@ -287,7 +283,7 @@
         android:hint="Teléfono"
         android:inputType="textPersonName"
         android:textColor="#0C0101"
-        android:textColorHint="#1B0101"
+        android:textColorHint="#1B8A9E"
         android:textSize="13sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/txtCont"
@@ -298,30 +294,28 @@
         android:id="@+id/txtPet"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_marginTop="30dp"
         android:ems="10"
         android:fontFamily="@font/tres"
         android:gravity="center"
         android:hint="Petición"
         android:inputType="textPersonName"
 
+        android:text="RECLAMO"
         android:textAlignment="gravity"
         android:textColor="#0E0101"
         android:textColorHint="#120101"
         android:textSize="13sp"
         android:textStyle="italic"
         android:visibility="invisible"
-        android:text="RECLAMO"
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        tools:layout_editor_absoluteX="205dp"
+        tools:layout_editor_absoluteY="-5dp" />
 
     <EditText
         android:id="@+id/txtCodRes"
         android:layout_width="170dp"
         android:layout_height="35dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginEnd="20dp"
         android:ems="10"
         android:enabled="false"
         android:fontFamily="@font/tres"
@@ -332,25 +326,23 @@
         android:textColorHint="#120000"
         android:textSize="14sp"
         android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/txtFec"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/txtMot"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
         android:ems="10"
         android:fontFamily="@font/tres"
         android:gravity="center"
         android:hint="Motivo"
         android:inputType="textPersonName"
+        android:textColor="#070000"
+        android:textColorHint="#1B8A9E"
         android:textSize="13sp"
         android:textStyle="italic"
-        android:textColor="#070000"
-        android:textColorHint="#1B0202"
         app:layout_constraintBottom_toTopOf="@+id/txtDesc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCor" />
@@ -387,7 +379,7 @@
         android:hint="Descripción"
         android:inputType="textPersonName"
         android:textColor="#070000"
-        android:textColorHint="#1B0202"
+        android:textColorHint="#1B8A9E"
         android:textSize="13sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/imageView"
@@ -406,30 +398,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/pelo1" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="117dp"
-        android:layout_height="176dp"
-        android:layout_marginStart="-20dp"
-        android:layout_marginTop="-40dp"
-        android:layout_marginEnd="-25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/jo" />
-
     <Spinner
         android:id="@+id/idSpinnerReserva"
         android:layout_width="81dp"
         android:layout_height="24dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@+id/txtCodRes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.535"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <ImageView
         android:id="@+id/fotoImg"
