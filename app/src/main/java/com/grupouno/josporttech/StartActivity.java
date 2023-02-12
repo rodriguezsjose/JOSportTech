@@ -48,9 +48,9 @@ public class StartActivity extends AppCompatActivity {
         msgd = _daoDeporte.registrarDeporte(new Deporte(103,"Natacion","9 carriles"));
         _daoSede.abrirBD();
         String msgs = "";
-        msgs = _daoSede.registrarSede(new Sede(901,"Nacional","Nacional","101010","-12.068990", "-77.033152",-9));
-        msgs = _daoSede.registrarSede(new Sede(102,"Matute","Matute","101010","-12.068367","-77.022110",-9));
-        msgs = _daoSede.registrarSede(new Sede(103,"Monumental","Monumental","101010","-12.056168","-76.937743",-9));
+        msgs = _daoSede.registrarSede(new Sede(901,"Nacional","Nacional","101010","-12.068990", "-77.033152",-9,"01 505 0505"));
+        msgs = _daoSede.registrarSede(new Sede(102,"Matute","Matute","101010","-12.068367","-77.022110",-9,"01 505 0505"));
+        msgs = _daoSede.registrarSede(new Sede(103,"Monumental","Monumental","101010","-12.056168","-76.937743",-9,"01 505 0505"));
     }
 
     private void asignarReferencias(){

@@ -56,7 +56,7 @@ public class ReservaActivity extends AppCompatActivity {
     //SEDES
     Sede sede;
     DAOSede daoSede = new DAOSede(this);
-    String nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede;
+    String nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, telefonoSede;
     int idCentroSede;
 
     List<Sede> listaSedes;
@@ -877,7 +877,8 @@ public class ReservaActivity extends AppCompatActivity {
         latitudSede = "000000";
         longitudSede = "000000";
         idCentroSede = 1;
-        sede = new Sede(1,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
+        telefonoSede = "01 606 0606";
+        sede = new Sede(1,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede,telefonoSede);
         daoSede.registrarSede(sede);
 
         nombreSede = "Sede Miraflores";
@@ -886,7 +887,8 @@ public class ReservaActivity extends AppCompatActivity {
         latitudSede = "000000";
         longitudSede = "000000";
         idCentroSede = 1;
-        sede = new Sede(2, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
+        telefonoSede = "01 606 0607";
+        sede = new Sede(2, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede,telefonoSede);
         daoSede.registrarSede(sede);
 
         nombreSede = "Sede Los Olivos";
@@ -895,7 +897,8 @@ public class ReservaActivity extends AppCompatActivity {
         latitudSede = "000000";
         longitudSede = "000000";
         idCentroSede = 1;
-        sede = new Sede(3,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
+        telefonoSede = "01 606 0608";
+        sede = new Sede(3,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede,telefonoSede);
         daoSede.registrarSede(sede);
 
         nombreSede = "Sede Rimac";
@@ -904,7 +907,8 @@ public class ReservaActivity extends AppCompatActivity {
         latitudSede = "000000";
         longitudSede = "000000";
         idCentroSede = 2;
-        sede = new Sede(4,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
+        telefonoSede = "01 606 0609";
+        sede = new Sede(4,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede,telefonoSede);
         daoSede.registrarSede(sede);
 
         nombreSede = "Sede Chorillos";
@@ -913,7 +917,8 @@ public class ReservaActivity extends AppCompatActivity {
         latitudSede = "000000";
         longitudSede = "000000";
         idCentroSede = 2;
-        sede = new Sede(5,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
+        telefonoSede = "01 606 0610";
+        sede = new Sede(5,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede,telefonoSede);
         daoSede.registrarSede(sede);
 
         nombreSede = "Sede San Borja";
@@ -922,7 +927,8 @@ public class ReservaActivity extends AppCompatActivity {
         latitudSede = "000000";
         longitudSede = "000000";
         idCentroSede = 3;
-        sede = new Sede(6, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
+        telefonoSede = "01 606 0611";
+        sede = new Sede(6, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede,telefonoSede);
         daoSede.registrarSede(sede);
 
         nombreSede = "Sede La Victoria";
@@ -931,7 +937,8 @@ public class ReservaActivity extends AppCompatActivity {
         latitudSede = "000000";
         longitudSede = "000000";
         idCentroSede = 3;
-        sede = new Sede(7, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
+        telefonoSede = "01 606 0612";
+        sede = new Sede(7, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede,telefonoSede);
         daoSede.registrarSede(sede);
 
     }

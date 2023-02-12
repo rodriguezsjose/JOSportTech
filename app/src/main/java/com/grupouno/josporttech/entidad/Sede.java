@@ -2,9 +2,15 @@ package com.grupouno.josporttech.entidad;
 
 public class Sede {
     private int id, idCentro;
-    private String nombre, descripcion, ubigeo, latitud, longitud;
+    private String nombre;
+    private String descripcion;
+    private String ubigeo;
+    private String latitud;
+    private String longitud;
 
-    public Sede(int id, String nombre, String descripcion, String ubigeo, String latitud, String longitud, int idCentro) {
+    private String telefono;
+
+    public Sede(int id, String nombre, String descripcion, String ubigeo, String latitud, String longitud, int idCentro, String telefono) {
         this.id = id;
         this.idCentro = idCentro;
         this.nombre = nombre;
@@ -12,15 +18,17 @@ public class Sede {
         this.ubigeo = ubigeo;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.telefono = telefono;
     }
 
-    public Sede(String nombre, String descripcion, String ubigeo, String latitud, String longitud, int idCentro) {
+    public Sede(String nombre, String descripcion, String ubigeo, String latitud, String longitud, int idCentro, String telefono) {
         this.idCentro = idCentro;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.ubigeo = ubigeo;
         this.latitud = latitud;
         this.longitud = longitud;
+        this.telefono = telefono;
     }
 
     public int getId() {
@@ -78,4 +86,14 @@ public class Sede {
     public void setLongitud(String longitud) {
         this.longitud = longitud;
     }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+
 }

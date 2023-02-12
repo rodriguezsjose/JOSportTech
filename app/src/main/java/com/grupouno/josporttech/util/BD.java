@@ -96,7 +96,8 @@ public BD(Context c){
                         " ubigeo TEXT NOT NULL, "+
                         " latitud TEXT, "+
                         " longitud TEXT, "+
-                        " idCentro INTEGER NOT NULL ); ";
+                        " idCentro INTEGER NOT NULL, "+
+                        " telefono TEXT ); ";
         sqLiteDatabase.execSQL(queryCreateSede);
 
         String queryCreateDeporte =

@@ -3,6 +3,7 @@ package com.grupouno.josporttech;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ public class SedeListaAdaptador extends RecyclerView.Adapter<SedeListaAdaptador.
         holder._sedeFilaDescripcion.setText(listaSedes.get(position).getDescripcion()+"");
         holder._sedeFilaLatitud.setText(listaSedes.get(position).getLatitud()+"");
         holder._sedeFilaLongitud.setText(listaSedes.get(position).getLongitud()+"");
+        holder._sedeFilaTelefono.setText(listaSedes.get(position).getTelefono()+"");
         holder._deporteFilaIrAlMapa.setOnClickListener(view -> {
             AlertDialog.Builder ventana = new AlertDialog.Builder(context);
             ventana.setTitle("Confirmar");
@@ -55,6 +57,17 @@ public class SedeListaAdaptador extends RecyclerView.Adapter<SedeListaAdaptador.
             });
             ventana.create().show();
         });
+        holder._deporteFilaLlamar.setOnClickListener(view -> {
+            AlertDialog.Builder ventana = new AlertDialog.Builder(context);
+            ventana.setTitle("Confirmar");
+            ventana.setMessage("Desea llamar a la Sede " + listaSedes.get(position).getNombre()+"?");
+            ventana.setNegativeButton("No",null);
+            ventana.setPositiveButton("Si",(dialogInterface, i) -> {
+                Intent iCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+listaSedes.get(position).getTelefono()));
+                context.startActivity(iCall);
+            });
+            ventana.create().show();
+        });
     }
 
     @Override
@@ -63,15 +76,17 @@ public class SedeListaAdaptador extends RecyclerView.Adapter<SedeListaAdaptador.
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView _sedeFilaNombre, _sedeFilaDescripcion, _sedeFilaLatitud, _sedeFilaLongitud;
-        ImageButton _deporteFilaIrAlMapa;
+        TextView _sedeFilaNombre, _sedeFilaDescripcion, _sedeFilaLatitud, _sedeFilaLongitud, _sedeFilaTelefono;
+        ImageButton _deporteFilaIrAlMapa, _deporteFilaLlamar;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             _sedeFilaNombre = itemView.findViewById(R.id.SedeFilaNombre);
             _sedeFilaDescripcion = itemView.findViewById(R.id.SedeFilaDescripcion);
             _sedeFilaLatitud = itemView.findViewById(R.id.SedeFilaLatitud);
             _sedeFilaLongitud = itemView.findViewById(R.id.SedeFilaLongitud);
+            _sedeFilaTelefono = itemView.findViewById(R.id.SedeFilaTelefono);
             _deporteFilaIrAlMapa = itemView.findViewById(R.id.SedeFilaIrAlMapa);
+            _deporteFilaLlamar = itemView.findViewById(R.id.SedeFilaLlamar);
         }
     }
 

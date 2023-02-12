@@ -37,6 +37,7 @@ public class DAOSede {
             valores.put("latitud", sede.getLatitud());
             valores.put("longitud", sede.getLongitud());
             valores.put("idCentro", sede.getIdCentro());
+            valores.put("telefono", sede.getTelefono());
             long result = db.insert("sede", null, valores);
             if(result == -1){
                 mensaje = "Error al insertar";
@@ -55,7 +56,7 @@ public class DAOSede {
             String[] selectionArgs = {String.valueOf(idCentro)};
             Cursor c = db.rawQuery("SELECT * FROM sede WHERE idCentro = ?",selectionArgs);
             while(c.moveToNext()){
-                listaSedes.add(new Sede(c.getInt(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6)));
+                listaSedes.add(new Sede(c.getInt(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6),c.getString(7)));
             }
         }catch (Exception e){
             Log.d("=>",e.getMessage());
@@ -75,7 +76,7 @@ public class DAOSede {
         try{
             Cursor c = db.rawQuery("SELECT * FROM sede",null);
             while(c.moveToNext()){
-                listaSedes.add(new Sede(c.getInt(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6)));
+                listaSedes.add(new Sede(c.getInt(0), c.getString(1),c.getString(2),c.getString(3),c.getString(4),c.getString(5),c.getInt(6),c.getString(7)));
             }
         }catch (Exception e){
             Log.d("=>",e.getMessage());
