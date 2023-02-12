@@ -41,7 +41,7 @@ public class Reserva {
         this.fecha = fecha;
         this.hora = hora;
     }
-    public Reserva(int id, int idCentro, String descCentro, int idSede, String descSede, int idDeporte, String descDeporte, String fecha, String hora, String estado, int flagPagado, int cantReprogramaciones){
+    public Reserva(int id, int idCentro, String descCentro, int idSede, String descSede, int idDeporte, String descDeporte, String fecha, String hora, String estado, int flagPagado, int cantReprogramaciones, int idMotivoAnulacion){
         this.id = id;
         this.idCentro = idCentro;
         this.descCentro = descCentro;
@@ -54,6 +54,7 @@ public class Reserva {
         this.flagPagado = flagPagado;
         this.cantReprogramaciones = cantReprogramaciones;
         this.idMotivoAnulacion = idMotivoAnulacion;
+        this.estado = estado;
     }
 
     public int getId() {
@@ -168,5 +169,3 @@ public class Reserva {
         this.descSede = descSede;
     }
 }
-
-

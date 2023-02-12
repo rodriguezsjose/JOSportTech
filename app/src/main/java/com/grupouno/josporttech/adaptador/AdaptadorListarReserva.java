@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,14 +32,14 @@ public class AdaptadorListarReserva extends RecyclerView.Adapter<AdaptadorListar
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdaptadorListarReserva.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.fila_listar_reserva,parent,false);
         return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdaptadorListarReserva.MyViewHolder holder, int position) {
         holder.filaCentro.setText(listaReserva.get(position).getDescCentro());
         holder.filaDeporte.setText(listaReserva.get(position).getDescDeporte());
         holder.filaFecha.setText(listaReserva.get(position).getFecha());
@@ -66,8 +67,15 @@ public class AdaptadorListarReserva extends RecyclerView.Adapter<AdaptadorListar
             intent.putExtra("p_descDeporte", listaReserva.get(position).getDescDeporte()+"");
             intent.putExtra("p_fecha", listaReserva.get(position).getFecha()+"");
             intent.putExtra("p_hora", listaReserva.get(position).getHora()+"");
+            intent.putExtra("p_estado", listaReserva.get(position).getEstado()+"");
+            intent.putExtra("p_idMotivoAnulacion", listaReserva.get(position).getIdMotivoAnulacion()+"");
             context.startActivity(intent);
         });
+        int flagPagado = listaReserva.get(position).getFlagPagado();
+        holder.imgReserva.setImageResource(R.drawable.ic_calendar_sin_pagar);
+        if ( flagPagado == 1 ){
+            holder.imgReserva.setImageResource(R.drawable.ic_calendar_pagado);
+        }
     }
 
     @Override
@@ -79,6 +87,7 @@ public class AdaptadorListarReserva extends RecyclerView.Adapter<AdaptadorListar
         TextView filaCentro, filaDeporte, filaFecha, filaHora;
         ImageButton btnEditar;
         CardView cvReserva;
+        ImageView imgReserva;
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
             filaCentro = itemView.findViewById(R.id.filaCentro);
@@ -87,6 +96,9 @@ public class AdaptadorListarReserva extends RecyclerView.Adapter<AdaptadorListar
             filaHora = itemView.findViewById(R.id.filaHora);
             btnEditar = itemView.findViewById(R.id.btnEditar);
             cvReserva = itemView.findViewById(R.id.cvReserva);
+            imgReserva = itemView.findViewById(R.id.imgReserva);
+            //cvReserva.
+
         }
     }
 }

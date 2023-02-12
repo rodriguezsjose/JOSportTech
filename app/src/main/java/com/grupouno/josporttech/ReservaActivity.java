@@ -1,9 +1,5 @@
 package com.grupouno.josporttech;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,27 +15,33 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.grupouno.josporttech.entidad.Centro;
 import com.grupouno.josporttech.entidad.Deporte;
 import com.grupouno.josporttech.entidad.Horario;
+import com.grupouno.josporttech.entidad.MotivoAnulacion;
 import com.grupouno.josporttech.entidad.Reserva;
 import com.grupouno.josporttech.entidad.Sede;
 import com.grupouno.josporttech.modelo.DAOCentro;
 import com.grupouno.josporttech.modelo.DAODeporte;
 import com.grupouno.josporttech.modelo.DAOHorario;
+import com.grupouno.josporttech.modelo.DAOMotivoAnulacion;
 import com.grupouno.josporttech.modelo.DAOReserva;
 import com.grupouno.josporttech.modelo.DAOSede;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class ReservaActivity extends AppCompatActivity {
 
     Button btnAccion;
+    TextView txtEtiquetaMotAnul;
 
     // CENTRO
-    Spinner sprCentro, sprSede, sprDeporte, sprFecha, sprHora;
+    Spinner sprCentro, sprSede, sprDeporte, sprFecha, sprHora, sprMotAnul;
     //ArrayAdapter<CharSequence> adapter;
 
     Centro centro;
@@ -73,12 +75,24 @@ public class ReservaActivity extends AppCompatActivity {
     int idSedeHorario, idDeporteHorario, cantidadHorario, aforoHorario, disponibilidadHorario;
     String fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario;
 
-    int idCentroFiltro, idSedeFiltro, idDeporteFiltro, idHorarioFiltro = 0;
+    int idCentroFiltro, idSedeFiltro, idDeporteFiltro, idHorarioFiltro, idMotivoAnulacionFiltro = 0;
     String fechaFiltro, horaFiltro = "";
 
     //RESERVA
     DAOReserva daoReserva = new DAOReserva(this);
     Reserva reserva;
+
+    //DETALLE
+    int idReservaDetalle, idCentroDetalle, idSedeDetalle, idDeporteDetalle, idMotivoAnulacionDetalle;
+    String fechaIniDetalle, horaIniDetalle, estadoDetalle;
+
+    //ACCION
+    int Accion;
+
+    //MOTIVO ANULACION
+    DAOMotivoAnulacion daoMotivoAnulacion = new DAOMotivoAnulacion(this);
+    MotivoAnulacion motivoAnulacion;
+    List<MotivoAnulacion> listaMotivoAnulacion;
 
     private BaseAdapter centroAdapter = new BaseAdapter() {
         @Override
@@ -124,7 +138,6 @@ public class ReservaActivity extends AppCompatActivity {
             private TextView txtCentroNombre;
         }
     };
-
     private BaseAdapter sedeAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
@@ -171,8 +184,7 @@ public class ReservaActivity extends AppCompatActivity {
 
 
     };
-
-    public BaseAdapter deporteHorarioAdapter = new BaseAdapter() {
+    private BaseAdapter deporteHorarioAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return listaDeportesHorario.size();
@@ -220,8 +232,7 @@ public class ReservaActivity extends AppCompatActivity {
             private TextView txtDeporteNombre;
         }
     };
-
-    public BaseAdapter fechaHorarioAdapter = new BaseAdapter() {
+    private BaseAdapter fechaHorarioAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return listaFechaHorario.size();
@@ -266,8 +277,7 @@ public class ReservaActivity extends AppCompatActivity {
             private TextView txtFechaReservaNombre;
         }
     };
-
-    public BaseAdapter horaHorarioAdapter = new BaseAdapter() {
+    private BaseAdapter horaHorarioAdapter = new BaseAdapter() {
         @Override
         public int getCount() {
             return listaHoraHorario.size();
@@ -299,7 +309,7 @@ public class ReservaActivity extends AppCompatActivity {
                 holder = (HoraHorarioHolder) horaHorarioView.getTag();
             }
 
-            Horario horario = listaFechaHorario.get(i);
+            Horario horario = listaHoraHorario.get(i);
             if (horario != null){
                 holder.txtHoraReservaID.setText(String.valueOf(horario.getId()));
                 holder.txtHoraReservaID.setVisibility(View.INVISIBLE);
@@ -312,17 +322,65 @@ public class ReservaActivity extends AppCompatActivity {
             private TextView txtHoraReservaNombre;
         }
     };
+    private BaseAdapter motivoAnulacionAdapter = new BaseAdapter() {
+        @Override
+        public int getCount() {
+            return listaMotivoAnulacion.size();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return listaMotivoAnulacion.get(i);
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return i;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            MotivoAnulacionHolder holder;
+            View motivoAnulacionView = view;
+
+            if (motivoAnulacionView == null){
+                motivoAnulacionView = getLayoutInflater().inflate(R.layout.fila_motivo_anulacion_spinner, viewGroup,false);
+
+                holder = new MotivoAnulacionHolder();
+                holder.txtMotAnulId = motivoAnulacionView.findViewById(R.id.txtMotAnulId);
+                holder.txtMotAnulNombre = motivoAnulacionView.findViewById(R.id.txtMotAnulNombre);
+                motivoAnulacionView.setTag(holder);
+            }else{
+                holder = (MotivoAnulacionHolder) motivoAnulacionView.getTag();
+            }
+
+            MotivoAnulacion motivoAnulacion = listaMotivoAnulacion.get(i);
+            holder.txtMotAnulId.setText(String.valueOf(motivoAnulacion.getId()));
+            holder.txtMotAnulId.setVisibility(View.INVISIBLE);
+            holder.txtMotAnulNombre.setText(motivoAnulacion.getNombre());
+
+            return motivoAnulacionView;
+        }
+        class MotivoAnulacionHolder{
+            private TextView txtMotAnulId;
+            private TextView txtMotAnulNombre;
+        }
+    };
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reserva);
+        /****Ini: Cargar Data de Prueba****/
         cargarCentros();
         cargarSedes();
         cargarDeportes();
         cargarHorarios();
+        CargarMotivoAnulacion();
+        /****Fin: Cargar Data de Prueba****/
         asignarReferencias();
+        CargaDetalleReserva();
     }
 
     @Override
@@ -338,16 +396,84 @@ public class ReservaActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.mreserva_reprogramar:
-                Toast.makeText(this, "Reprogramar", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Reprogramar", Toast.LENGTH_SHORT).show();
+                sprFecha.setEnabled(true);
+                sprHora.setEnabled(true);
+                btnAccion.setText("Reprogramar");
+                btnAccion.setVisibility(View.VISIBLE);
+                Accion = 3;
                 return true;
             case R.id.mreserva_pagar:
-                Toast.makeText(this,"Pagar", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"Pagar", Toast.LENGTH_SHORT).show();
+                btnAccion.setText("Pagar");
+                btnAccion.setVisibility(View.VISIBLE);
+                Accion = 4;
                 return true;
             case R.id.mreserva_anular:
-                Toast.makeText(this, "Anular",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Anular",Toast.LENGTH_SHORT).show();
+                btnAccion.setText("Anular");
+                btnAccion.setVisibility(View.VISIBLE);
+                txtEtiquetaMotAnul.setVisibility(View.VISIBLE);
+                sprMotAnul.setVisibility(View.VISIBLE);
+                sprMotAnul.setEnabled(true);
+                Accion = 5;
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void CargaDetalleReserva(){
+        setTitle("Crear Reserva");
+        Accion = 1; // REGISTRO
+        if(getIntent().hasExtra("p_id")) {
+
+            setTitle("Visualizar Reserva");
+            idReservaDetalle = Integer.parseInt(getIntent().getStringExtra("p_id"));
+            idCentroDetalle = Integer.parseInt(getIntent().getStringExtra("p_idCentro"));
+            idSedeDetalle = Integer.parseInt(getIntent().getStringExtra("p_idSede"));
+            idDeporteDetalle = Integer.parseInt(getIntent().getStringExtra("p_idDeporte"));
+            fechaIniDetalle =  getIntent().getStringExtra("p_fecha");
+            horaIniDetalle =  getIntent().getStringExtra("p_hora");
+            estadoDetalle = getIntent().getStringExtra("p_estado");
+            idMotivoAnulacionDetalle = Integer.parseInt(getIntent().getStringExtra("p_idMotivoAnulacion"));
+            Accion = 2; // DETALLE
+            btnAccion.setVisibility(View.INVISIBLE);
+            if (estadoDetalle.equals("ANULADA")){
+                txtEtiquetaMotAnul.setVisibility(View.VISIBLE);
+                sprMotAnul.setVisibility(View.VISIBLE);
+            }
+
+//            /* Setear Centro */
+//            int cont = 0;
+//            int tam = listaCentros.size();
+//            while (cont < tam){
+//                if (((Centro)listaCentros.get(cont)).getId() == idCentroDetalle){
+//                    sprCentro.setSelection(cont);
+//                    cont = tam;
+//                }
+//                cont = cont + 1;
+//            }
+//            /* Setear Sede */
+//            cont = 0;
+//            tam = listaSedes.size();
+//            while (cont < tam){
+//                if (((Sede)listaSedes.get(cont)).getId() == idSedeDetalle){
+//                    sprSede.setSelection(cont);
+//                    cont = tam;
+//                }
+//                cont = cont + 1;
+//            }
+//            /* Setear Deporte */
+//            cont = 0;
+//            tam = listaDeportesHorario.size();
+//            while (cont < tam){
+//                if (((Horario)listaDeportesHorario.get(cont)).getIdDeporte() == idDeporteDetalle){
+//                    sprDeporte.setSelection(cont);
+//                    cont = tam;
+//                }
+//                cont = cont + 1;
+//            }
         }
     }
 
@@ -358,6 +484,8 @@ public class ReservaActivity extends AppCompatActivity {
         sprFecha = findViewById(R.id.sprFecha);
         sprHora = findViewById(R.id.sprHora);
         btnAccion = findViewById(R.id.btnAccion);
+        txtEtiquetaMotAnul = findViewById(R.id.txtEtiquetaMotAnul);
+        sprMotAnul = findViewById(R.id.sprMotAnul);
 
         CargaSpinnerCentro();
         sprCentro.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -370,9 +498,20 @@ public class ReservaActivity extends AppCompatActivity {
                 if (idCentro > 0 ){
                     idCentroFiltro = idCentro;
                 }
-                //Toast.makeText(ReservaActivity.this,String.valueOf(idCentro),Toast.LENGTH_SHORT).show();
+                if (Accion == 2){
+                    /* Setear Centro */
+                    int cont = 0;
+                    int tam = listaCentros.size();
+                    while (cont < tam){
+                        if (((Centro)listaCentros.get(cont)).getId() == idCentroDetalle){
+                            sprCentro.setSelection(cont);
+                            cont = tam;
+                        }
+                        cont = cont + 1;
+                    }
+                    sprCentro.setEnabled(false);
+                }
                 CargaSpinnerSede(idCentroFiltro);
-
             }
 
             @Override
@@ -387,6 +526,19 @@ public class ReservaActivity extends AppCompatActivity {
                 idSedeFiltro = 0;
                 if(idSede > 0){
                     idSedeFiltro = idSede;
+                }
+                if (Accion == 2){
+                    /* Setear Sede */
+                    int cont = 0;
+                    int tam = listaSedes.size();
+                    while (cont < tam){
+                        if (((Sede)listaSedes.get(cont)).getId() == idSedeDetalle){
+                            sprSede.setSelection(cont);
+                            cont = tam;
+                        }
+                        cont = cont + 1;
+                    }
+                    sprSede.setEnabled(false);
                 }
                 CargaSpinnerDeporte(idSede);
             }
@@ -403,8 +555,21 @@ public class ReservaActivity extends AppCompatActivity {
                 idDeporteFiltro =0;
                 if(idDeporte > 0){
                     idDeporteFiltro = idDeporte;
-                    CargaSpinnerFecha(idSedeFiltro, idDeporteFiltro);
                 }
+                if (Accion == 2){
+                    /* Setear Deporte */
+                    int cont = 0;
+                    int tam = listaDeportesHorario.size();
+                    while (cont < tam){
+                        if (((Horario)listaDeportesHorario.get(cont)).getIdDeporte() == idDeporteDetalle){
+                            sprDeporte.setSelection(cont);
+                            cont = tam;
+                        }
+                        cont = cont + 1;
+                    }
+                    sprDeporte.setEnabled(false);
+                }
+                CargaSpinnerFecha(idSedeFiltro, idDeporteFiltro);
             }
 
             @Override
@@ -419,6 +584,20 @@ public class ReservaActivity extends AppCompatActivity {
                 fechaFiltro = "";
                 if(!fecha.equals("")){
                     fechaFiltro = fecha;
+                }
+                if (Accion == 2){
+                    /* Setear Deporte */
+                    int cont = 0;
+                    int tam = listaFechaHorario.size();
+                    while (cont < tam){
+                        String fechaIni_1 = ((Horario)listaFechaHorario.get(cont)).getFechaIni();
+                        if ( fechaIni_1.equals(fechaIniDetalle)){
+                            sprFecha.setSelection(cont);
+                            cont = tam;
+                        }
+                        cont = cont + 1;
+                    }
+                    sprFecha.setEnabled(false);
                 }
                 CargaSpinnerHora(idSedeFiltro, idDeporteFiltro, fecha);
             }
@@ -441,6 +620,49 @@ public class ReservaActivity extends AppCompatActivity {
                 if (!hora.equals("")){
                     horaFiltro = hora;
                 }
+                if (Accion == 2){
+                    /* Setear Deporte */
+                    int cont = 0;
+                    int tam = listaHoraHorario.size();
+                    while (cont < tam){
+                        String horaIni_1 = ((Horario)listaHoraHorario.get(cont)).getHoraIni();
+                        if ( horaIni_1.equals(horaIniDetalle)){
+                            sprHora.setSelection(cont);
+                            cont = tam;
+                        }
+                        cont = cont + 1;
+                    }
+                    sprHora.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        CargaSpinnerMotivoAnulacion();
+        sprMotAnul.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                int idMotivoAnulacion = ((MotivoAnulacion) adapterView.getSelectedItem()).getId();
+                idMotivoAnulacionFiltro = 0;
+                if (idMotivoAnulacion > 0 ){
+                    idMotivoAnulacionFiltro = idMotivoAnulacion;
+                }
+                if (Accion == 2){
+                    /* Setear Centro */
+                    int cont = 0;
+                    int tam = listaMotivoAnulacion.size();
+                    while (cont < tam){
+                        if (((MotivoAnulacion)listaMotivoAnulacion.get(cont)).getId() == idMotivoAnulacionDetalle){
+                            sprMotAnul.setSelection(cont);
+                            cont = tam;
+                        }
+                        cont = cont + 1;
+                    }
+                    sprMotAnul.setEnabled(false);
+                }
             }
 
             @Override
@@ -450,12 +672,34 @@ public class ReservaActivity extends AppCompatActivity {
         });
 
         btnAccion.setOnClickListener(view -> {
-            if (capturarDatos() == true){
-                daoReserva.abrirBD();
-                String mensaje;
-                mensaje = daoReserva.registrarReserva(reserva);
-                mostrarMensaje(mensaje);
+            String mensajeBoton;
+            switch (Accion)
+            {
+                case 1: //REGISTRO
+                    if (capturarDatos() == true){
+                        daoReserva.abrirBD();
+                        mensajeBoton = daoReserva.registrarReserva(reserva);
+                        mostrarMensaje(mensajeBoton);
+                        break;
+                    }
+                case 3: //REPROGRAMAR
+                    daoReserva.abrirBD();
+                    mensajeBoton = daoReserva.reprogramarReserva(idReservaDetalle,fechaFiltro, horaFiltro);
+                    mostrarMensaje(mensajeBoton);
+                    break;
+                case 4: //PAGAR
+                    daoReserva.abrirBD();
+                    mensajeBoton = daoReserva.pagarReserva(idReservaDetalle);
+                    mostrarMensaje(mensajeBoton);
+                    break;
+                case 5: //ANULAR
+                    daoReserva.abrirBD();
+                    mensajeBoton = daoReserva.AnularReserva(idReservaDetalle, idMotivoAnulacionFiltro);
+                    mostrarMensaje(mensajeBoton);
+                    break;
+                default:
             }
+
         });
 
     }
@@ -515,7 +759,6 @@ public class ReservaActivity extends AppCompatActivity {
         sprSede.setAdapter(sedeAdapter);
 
     }
-
     private void CargaSpinnerDeporte(int idSede){
         daoHorario.abrirBD();
         listaDeportesHorario = new ArrayList<>();
@@ -529,7 +772,6 @@ public class ReservaActivity extends AppCompatActivity {
         }
         sprDeporte.setAdapter(deporteHorarioAdapter);
     }
-
     private void CargaSpinnerFecha(int idSede, int idDeporte){
         daoHorario.abrirBD();
         listaFechaHorario = new ArrayList<>();
@@ -541,7 +783,6 @@ public class ReservaActivity extends AppCompatActivity {
         }
         sprFecha.setAdapter(fechaHorarioAdapter);
     }
-
     private void CargaSpinnerHora(int idSede, int idDeporte, String fecha){
         daoHorario.abrirBD();
         listaHoraHorario = new ArrayList<>();
@@ -550,6 +791,12 @@ public class ReservaActivity extends AppCompatActivity {
             horaFiltro = "";
         }
         sprHora.setAdapter(horaHorarioAdapter);
+    }
+    private void CargaSpinnerMotivoAnulacion(){
+        daoMotivoAnulacion.abridBD();
+        listaMotivoAnulacion = new ArrayList<>();
+        listaMotivoAnulacion = daoMotivoAnulacion.obtenerMotivoAnulacion();
+        sprMotAnul.setAdapter(motivoAnulacionAdapter);
     }
 
     private boolean capturarDatos(){
@@ -595,24 +842,24 @@ public class ReservaActivity extends AppCompatActivity {
         daoCentro.abridBD();
         daoCentro.borrarDatos();
 
-        nombreCentro = "Centro1";
-        descripcionCentro = "Centro1";
+        nombreCentro = "Polideportivo Dansey";
+        descripcionCentro = "Polideportivo Dansey";
         idProveedorCentro = 1;
         horaIniCentro = "08:00:00";
         horaFinCentro = "22:00:00";
         centro = new Centro(1,nombreCentro, descripcionCentro,idProveedorCentro,horaIniCentro,horaFinCentro);
         daoCentro.registrarCentro(centro);
 
-        nombreCentro = "Centro2";
-        descripcionCentro = "Centro2";
+        nombreCentro = "Videna";
+        descripcionCentro = "Videna";
         idProveedorCentro = 1;
         horaIniCentro = "08:00:00";
         horaFinCentro = "22:00:00";
         centro = new Centro(2, nombreCentro, descripcionCentro,idProveedorCentro,horaIniCentro,horaFinCentro);
         daoCentro.registrarCentro(centro);
 
-        nombreCentro = "Centro3";
-        descripcionCentro = "Centro3";
+        nombreCentro = "Centro Recreativo";
+        descripcionCentro = "Centro Recreativo";
         idProveedorCentro = 1;
         horaIniCentro = "08:00:00";
         horaFinCentro = "22:00:00";
@@ -624,8 +871,8 @@ public class ReservaActivity extends AppCompatActivity {
         daoSede.abrirBD();
         daoSede.borrarDatos();
 
-        nombreSede = "Sede 1_1";
-        descripcionSede = "Sede 1_1";
+        nombreSede = "Sede Lince";
+        descripcionSede = "Sede Lince";
         ubigeoSede = "000000";
         latitudSede = "000000";
         longitudSede = "000000";
@@ -633,8 +880,8 @@ public class ReservaActivity extends AppCompatActivity {
         sede = new Sede(1,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
         daoSede.registrarSede(sede);
 
-        nombreSede = "Sede 1_2";
-        descripcionSede = "Sede 1_2";
+        nombreSede = "Sede Miraflores";
+        descripcionSede = "Sede Miraflores";
         ubigeoSede = "000000";
         latitudSede = "000000";
         longitudSede = "000000";
@@ -642,8 +889,8 @@ public class ReservaActivity extends AppCompatActivity {
         sede = new Sede(2, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
         daoSede.registrarSede(sede);
 
-        nombreSede = "Sede 1_3";
-        descripcionSede = "Sede 1_3";
+        nombreSede = "Sede Los Olivos";
+        descripcionSede = "Sede Los Olivos";
         ubigeoSede = "000000";
         latitudSede = "000000";
         longitudSede = "000000";
@@ -651,8 +898,8 @@ public class ReservaActivity extends AppCompatActivity {
         sede = new Sede(3,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
         daoSede.registrarSede(sede);
 
-        nombreSede = "Sede 2_1";
-        descripcionSede = "Sede 2_1";
+        nombreSede = "Sede Rimac";
+        descripcionSede = "Sede Rimac";
         ubigeoSede = "000000";
         latitudSede = "000000";
         longitudSede = "000000";
@@ -660,8 +907,8 @@ public class ReservaActivity extends AppCompatActivity {
         sede = new Sede(4,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
         daoSede.registrarSede(sede);
 
-        nombreSede = "Sede 2_2";
-        descripcionSede = "Sede 2_2";
+        nombreSede = "Sede Chorillos";
+        descripcionSede = "Sede Chorillos";
         ubigeoSede = "000000";
         latitudSede = "000000";
         longitudSede = "000000";
@@ -669,8 +916,8 @@ public class ReservaActivity extends AppCompatActivity {
         sede = new Sede(5,nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
         daoSede.registrarSede(sede);
 
-        nombreSede = "Sede 3_1";
-        descripcionSede = "Sede 3_1";
+        nombreSede = "Sede San Borja";
+        descripcionSede = "Sede San Borja";
         ubigeoSede = "000000";
         latitudSede = "000000";
         longitudSede = "000000";
@@ -678,8 +925,8 @@ public class ReservaActivity extends AppCompatActivity {
         sede = new Sede(6, nombreSede, descripcionSede, ubigeoSede, latitudSede, longitudSede, idCentroSede);
         daoSede.registrarSede(sede);
 
-        nombreSede = "Sede 3_2";
-        descripcionSede = "Sede 3_2";
+        nombreSede = "Sede La Victoria";
+        descripcionSede = "Sede La Victoria";
         ubigeoSede = "000000";
         latitudSede = "000000";
         longitudSede = "000000";
@@ -722,11 +969,28 @@ public class ReservaActivity extends AppCompatActivity {
         deporte = new Deporte(6, nombreDeporte, descripcionDeporte);
         daoDeporte.registrarDeporte(deporte);
 
+        nombreDeporte = "Ping Pong";
+        descripcionDeporte = "Ping Pong";
+        deporte = new Deporte(7, nombreDeporte, descripcionDeporte);
+        daoDeporte.registrarDeporte(deporte);
+
+        nombreDeporte = "Karate";
+        descripcionDeporte = "Karate";
+        deporte = new Deporte(8, nombreDeporte, descripcionDeporte);
+        daoDeporte.registrarDeporte(deporte);
+
+        nombreDeporte = "Bowling";
+        descripcionDeporte = "Bowling";
+        deporte = new Deporte(9, nombreDeporte, descripcionDeporte);
+        daoDeporte.registrarDeporte(deporte);
+
     }
     private void cargarHorarios(){
         daoHorario.abrirBD();
         daoHorario.borrarDatos();
 
+//      SEDE 1
+//      DEPORTE 1
         idSedeHorario = 1;
         idDeporteHorario = 1;
         fechaIniHorario = "14/02/2023";
@@ -740,7 +1004,7 @@ public class ReservaActivity extends AppCompatActivity {
         daoHorario.RegistrarHorario(horario);
 
         idSedeHorario = 1;
-        idDeporteHorario = 2;
+        idDeporteHorario = 1;
         fechaIniHorario = "14/02/2023";
         horaIniHorario = "20:00:00";
         fechaFinHorario = "14/02/2023";
@@ -748,11 +1012,11 @@ public class ReservaActivity extends AppCompatActivity {
         cantidadHorario = 10;
         aforoHorario = 20;
         disponibilidadHorario = 10;
-        horario = new Horario(2,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        horario = new Horario(2, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
         daoHorario.RegistrarHorario(horario);
 
         idSedeHorario = 1;
-        idDeporteHorario = 3;
+        idDeporteHorario = 1;
         fechaIniHorario = "14/02/2023";
         horaIniHorario = "21:00:00";
         fechaFinHorario = "14/02/2023";
@@ -760,8 +1024,349 @@ public class ReservaActivity extends AppCompatActivity {
         cantidadHorario = 10;
         aforoHorario = 20;
         disponibilidadHorario = 10;
-        horario = new Horario(3,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        horario = new Horario(3, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
         daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 1;
+        idDeporteHorario = 1;
+        fechaIniHorario = "15/02/2023";
+        horaIniHorario = "10:00:00";
+        fechaFinHorario = "15/02/2023";
+        horaFinHorario = "11:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(4, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 1
+//      DEPORTE 2
+        idSedeHorario = 1;
+        idDeporteHorario = 2;
+        fechaIniHorario = "19/02/2023";
+        horaIniHorario = "13:00:00";
+        fechaFinHorario = "19/02/2023";
+        horaFinHorario = "19:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(5,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 1;
+        idDeporteHorario = 2;
+        fechaIniHorario = "19/02/2023";
+        horaIniHorario = "14:00:00";
+        fechaFinHorario = "19/02/2023";
+        horaFinHorario = "15:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(6,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 1;
+        idDeporteHorario = 2;
+        fechaIniHorario = "20/02/2023";
+        horaIniHorario = "20:00:00";
+        fechaFinHorario = "20/02/2023";
+        horaFinHorario = "21:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(7,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 1
+//      DEPORTE 3
+        idSedeHorario = 1;
+        idDeporteHorario = 3;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "16:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "17:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(8,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 1;
+        idDeporteHorario = 3;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "17:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "18:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(9,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 1;
+        idDeporteHorario = 3;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "18:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "19:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(10,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 2
+//      DEPORTE 4
+        idSedeHorario = 2;
+        idDeporteHorario = 4;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "19:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "20:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(11, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 2;
+        idDeporteHorario = 4;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "20:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "21:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(12, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 2;
+        idDeporteHorario = 4;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "21:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "22:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(13, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 2;
+        idDeporteHorario = 4;
+        fechaIniHorario = "15/02/2023";
+        horaIniHorario = "10:00:00";
+        fechaFinHorario = "15/02/2023";
+        horaFinHorario = "11:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(14, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 2
+//      DEPORTE 5
+        idSedeHorario = 2;
+        idDeporteHorario = 5;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "13:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "14:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(15,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 2;
+        idDeporteHorario = 5;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "14:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "15:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(16,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 2;
+        idDeporteHorario = 5;
+        fechaIniHorario = "15/02/2023";
+        horaIniHorario = "20:00:00";
+        fechaFinHorario = "15/02/2023";
+        horaFinHorario = "21:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(17,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 2
+//      DEPORTE 6
+        idSedeHorario = 2;
+        idDeporteHorario = 6;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "16:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "17:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(18,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 2;
+        idDeporteHorario = 6;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "17:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "18:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(19,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 2;
+        idDeporteHorario = 6;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "18:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "19:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(20,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 3
+//      DEPORTE 7
+        idSedeHorario = 3;
+        idDeporteHorario = 7;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "19:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "20:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(21, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 3;
+        idDeporteHorario = 7;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "20:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "21:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(22, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 3;
+        idDeporteHorario = 7;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "21:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "22:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(23, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 3;
+        idDeporteHorario = 7;
+        fechaIniHorario = "15/02/2023";
+        horaIniHorario = "10:00:00";
+        fechaFinHorario = "15/02/2023";
+        horaFinHorario = "11:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(24, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 3
+//      DEPORTE 8
+        idSedeHorario = 3;
+        idDeporteHorario = 8;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "13:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "14:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(25,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 3;
+        idDeporteHorario = 8;
+        fechaIniHorario = "14/02/2023";
+        horaIniHorario = "14:00:00";
+        fechaFinHorario = "14/02/2023";
+        horaFinHorario = "15:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(26,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 3;
+        idDeporteHorario = 8;
+        fechaIniHorario = "15/02/2023";
+        horaIniHorario = "20:00:00";
+        fechaFinHorario = "15/02/2023";
+        horaFinHorario = "21:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(27,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+//      SEDE 3
+//      DEPORTE 9
+        idSedeHorario = 3;
+        idDeporteHorario = 9;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "16:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "17:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(28,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 3;
+        idDeporteHorario = 9;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "17:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "18:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(29,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
+        idSedeHorario = 3;
+        idDeporteHorario = 9;
+        fechaIniHorario = "17/02/2023";
+        horaIniHorario = "18:00:00";
+        fechaFinHorario = "17/02/2023";
+        horaFinHorario = "19:00:00";
+        cantidadHorario = 10;
+        aforoHorario = 20;
+        disponibilidadHorario = 10;
+        horario = new Horario(30,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        daoHorario.RegistrarHorario(horario);
+
 
         idSedeHorario = 4;
         idDeporteHorario = 1;
@@ -772,7 +1377,7 @@ public class ReservaActivity extends AppCompatActivity {
         cantidadHorario = 10;
         aforoHorario = 20;
         disponibilidadHorario = 10;
-        horario = new Horario(4,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        horario = new Horario(31,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
         daoHorario.RegistrarHorario(horario);
 
         idSedeHorario = 4;
@@ -784,7 +1389,7 @@ public class ReservaActivity extends AppCompatActivity {
         cantidadHorario = 10;
         aforoHorario = 20;
         disponibilidadHorario = 10;
-        horario = new Horario(5, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        horario = new Horario(32, idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
         daoHorario.RegistrarHorario(horario);
 
         idSedeHorario = 4;
@@ -796,8 +1401,16 @@ public class ReservaActivity extends AppCompatActivity {
         cantidadHorario = 10;
         aforoHorario = 20;
         disponibilidadHorario = 10;
-        horario = new Horario(6,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
+        horario = new Horario(33,idSedeHorario, idDeporteHorario, fechaIniHorario, horaIniHorario, fechaFinHorario, horaFinHorario, cantidadHorario, aforoHorario, disponibilidadHorario);
         daoHorario.RegistrarHorario(horario);
 
+    }
+    private void CargarMotivoAnulacion(){
+       daoMotivoAnulacion.abridBD();
+       daoMotivoAnulacion.borrarDatos();
+       daoMotivoAnulacion.registrarMotivoAnulacion(new MotivoAnulacion(1,"Salud","Salud"));
+       daoMotivoAnulacion.registrarMotivoAnulacion(new MotivoAnulacion(2,"Viaje","Viaje"));
+       daoMotivoAnulacion.registrarMotivoAnulacion(new MotivoAnulacion(3,"Trabajo","Trabajo"));
+       daoMotivoAnulacion.registrarMotivoAnulacion(new MotivoAnulacion(4,"Otros","Otros"));
     }
 }

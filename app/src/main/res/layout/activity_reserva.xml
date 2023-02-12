@@ -104,6 +104,24 @@
         android:text="RESERVAR"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sprHora" />
+        app:layout_constraintTop_toBottomOf="@+id/sprMotAnul" />
+
+    <TextView
+        android:id="@+id/txtEtiquetaMotAnul"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:text="Motivo Anulacion"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <Spinner
+        android:id="@+id/sprMotAnul"
+        android:layout_width="200dp"
+        android:layout_height="26dp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/sprHora"
+        app:layout_constraintTop_toTopOf="@+id/txtEtiquetaMotAnul" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
