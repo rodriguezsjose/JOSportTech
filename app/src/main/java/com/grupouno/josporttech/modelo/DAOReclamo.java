@@ -46,10 +46,10 @@ public class DAOReclamo {
             long result = db.insert("rec", null, valores);
 
             if (result == -1){
-                mensaje = "error";
+                mensaje = "No se logró registrar su reclamo";
             }
             else {
-                mensaje = "Se registró";
+                mensaje = "Se registró reclamo exitosamente";
             }
 
 

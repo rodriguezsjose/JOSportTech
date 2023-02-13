@@ -24,9 +24,10 @@
         android:id="@+id/btnDeporte"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="32dp"
-        android:text="Deportes"
+        android:layout_marginTop="100dp"
         android:background="@color/cardview_light_background"
+        android:text="Deportes"
+        app:layout_constraintBottom_toTopOf="@+id/btnReserva"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lblTitulo" />
@@ -35,9 +36,9 @@
         android:id="@+id/btnReserva"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:text="Reserva"
         android:background="@color/cardview_light_background"
+        android:text="Reserva"
+        app:layout_constraintBottom_toTopOf="@+id/btnReclamo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnDeporte" />
@@ -46,12 +47,25 @@
         android:id="@+id/btnReclamo"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:text="Reclamo"
         android:background="@color/cardview_light_background"
+        android:text="Reclamo"
+        app:layout_constraintBottom_toTopOf="@+id/btnProv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnReserva" />
+
+    <Button
+        android:id="@+id/btnProv"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="200dp"
+        android:background="@color/cardview_light_background"
+        android:text="Proveedores"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnReclamo"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

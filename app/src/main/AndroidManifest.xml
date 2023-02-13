@@ -114,6 +114,39 @@
                 android:value="" />
 
         </activity>
+
+        <activity
+            android:name=".CD_Prov_Activity"
+            android:exported="true"
+            android:label="Registro de Centro Deportivo">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+
+        <activity
+            android:name=".ActivityDetalleProveedor"
+            android:exported="true"
+            android:label="Información de Centro Deportivo">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+
+        <activity
+            android:name=".ActivityListarProv"
+            android:exported="true"
+            android:label="Listado de Centro Deportivo">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+        </activity>
+
+
+
         <activity
             android:name=".Reclamo_Activity"
             android:exported="true"
@@ -129,7 +162,11 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-        </activity>
+
+
+
+
+            </activity>
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class Expo1Activity extends AppCompatActivity {
 
-    Button _btnReclamo, _btnReserva, _btnDeportes;
+    Button _btnReclamo, _btnReserva, _btnDeportes, _btnProv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +22,7 @@ public class Expo1Activity extends AppCompatActivity {
         _btnReclamo = findViewById(R.id.btnReclamo);
         _btnReserva = findViewById(R.id.btnReserva);
         _btnDeportes = findViewById(R.id.btnDeporte);
+        _btnProv =  findViewById(R.id.btnProv);
         ///
         _btnReclamo.setOnClickListener(view -> {
             Intent intent = new Intent(this, ActivityListarReclamo.class);
@@ -33,6 +34,11 @@ public class Expo1Activity extends AppCompatActivity {
         });
         _btnDeportes.setOnClickListener(view -> {
             Intent intent = new Intent(this, DeporteListarActivity.class);
+            startActivity(intent);
+        });
+
+        _btnProv.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ActivityListarProv.class);
             startActivity(intent);
         });
 
