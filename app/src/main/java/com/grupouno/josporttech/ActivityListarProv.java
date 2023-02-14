@@ -25,15 +25,15 @@ public class ActivityListarProv extends AppCompatActivity {
         setContentView(R.layout.activity_listar_prov);
         asignarReferencias();
         daoProv.abriBD();
-        mostrarProv();
+       //mostrarProv();
 
     }
 
     private void mostrarProv() {
         listaprov = daoProv.obtenerProv();
         adap = new AdaptadorProv(this, listaprov);
-        rvProve.setAdapter(adap);
-        rvProve.setLayoutManager(new LinearLayoutManager(this));
+     rvProve.setAdapter(adap);
+       rvProve.setLayoutManager(new LinearLayoutManager(this));
 
     }
 

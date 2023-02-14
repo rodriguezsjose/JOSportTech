@@ -40,23 +40,29 @@ public class AdaptadorProv extends RecyclerView.Adapter<AdaptadorProv.MyViewHold
         holder.filaNombre.setText(listprov.get(position).getId()+"");
         holder.filaDireccion.setText(listprov.get(position).getNom()+"");
         holder.filaHorario.setText(listprov.get(position).getDir()+"");
-
-        holder.btnVer.setOnClickListener(v -> {
-            Intent intent = new Intent(c, ActivityDetalleProveedor.class);
-            intent.putExtra("p_id", listprov.get(position).getId()+"");
-            intent.putExtra("p_nom", listprov.get(position).getNom()+"");
-            intent.putExtra("p_dir", listprov.get(position).getDir()+"");
-            intent.putExtra("p_hor", listprov.get(position).getHor()+"");
-            intent.putExtra("p_prov", listprov.get(position).getProv()+"");
-            intent.putExtra("p_dist", listprov.get(position).getDist()+"");
-            intent.putExtra("p_ref",listprov.get(position).getRef()+"");
-            intent.putExtra("p_dep", listprov.get(position).getDep()+"");
-            intent.putExtra("p_serv", listprov.get(position).getServ()+"");
-            intent.putExtra("p_gal", listprov.get(position).getGal()+"");
-            c.startActivity(intent);
+       // holder.btnVer.setOnClickListener(v -> {
+      //     Intent intent = new Intent(c, ActivityDetalleReclamo.class);
+      //    c.startActivity(intent);
+      //  });
 
 
-        });
+
+      //  holder.btnVer.setOnClickListener(v -> {
+           // Intent intent = new Intent(c, ActivityDetalleProveedor.class);
+           // intent.putExtra("p_id", listprov.get(position).getId()+"");
+           // intent.putExtra("p_nom", listprov.get(position).getNom()+"");
+            //intent.putExtra("p_dir", listprov.get(position).getDir()+"");
+            //intent.putExtra("p_hor", listprov.get(position).getHor()+"");
+            //intent.putExtra("p_prov", listprov.get(position).getProv()+"");
+            //intent.putExtra("p_dist", listprov.get(position).getDist()+"");
+            //intent.putExtra("p_ref",listprov.get(position).getRef()+"");
+            //intent.putExtra("p_dep", listprov.get(position).getDep()+"");
+            //intent.putExtra("p_serv", listprov.get(position).getServ()+"");
+            //intent.putExtra("p_gal", listprov.get(position).getGal()+"");
+           // c.startActivity(intent);
+
+
+       // });
 
     }
 

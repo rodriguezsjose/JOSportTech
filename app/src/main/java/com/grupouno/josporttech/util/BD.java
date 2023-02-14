@@ -26,6 +26,20 @@ public BD(Context c){
                     " password TEXT NOT NULL);";
     sqLiteDatabase.execSQL(query_user);
 
+    String queryCentro =
+            "CREATE TABLE centrodeportivo "+
+                    "(id INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                    " nom TEXT NOT NULL, "+
+                    " dir TEXT NOT NULL, "+
+                    " hor TEXT NOT NULL, "+
+                    " prov TEXT NOT NULL, "+
+                    " dist TEXT NOT NULL, "+
+                    " ref TEXT NOT NULL, "+
+                    " dep TEXT NOT NULL, "+
+                    " serv TEXT NOT NULL, "+
+                    " gal TEXT NOT NULL);";
+    sqLiteDatabase.execSQL(queryCentro);
+
     String query =
             "CREATE TABLE tablaprueba "+
                     "(id INTEGER PRIMARY KEY AUTOINCREMENT, "+

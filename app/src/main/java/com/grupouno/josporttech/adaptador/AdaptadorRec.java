@@ -46,18 +46,18 @@ public class AdaptadorRec extends RecyclerView.Adapter<AdaptadorRec.MyViewHolder
         holder.filaRes.setText(listreclamo.get(position).getCodReserva()+"");
         holder.filaFec.setText(listreclamo.get(position).getFecha()+"");
         holder.btnVer.setOnClickListener(v -> {
-            Intent intent = new Intent(c, ActivityDetalleReclamo.class);
-            intent.putExtra("p_id", listreclamo.get(position).getId()+"");
-            intent.putExtra("p_pet", listreclamo.get(position).getPeticion()+"");
-            intent.putExtra("p_res", listreclamo.get(position).getCodReserva()+"");
-            intent.putExtra("p_fec", listreclamo.get(position).getFecha()+"");
-            intent.putExtra("p_ced", listreclamo.get(position).getCentroD()+"");
-            intent.putExtra("p_med", listreclamo.get(position).getMedioContacto()+"");
-            intent.putExtra("p_con", listreclamo.get(position).getContacto()+"");
-            intent.putExtra("p_cor", listreclamo.get(position).getCorreo()+"");
-            intent.putExtra("p_mot", listreclamo.get(position).getMotivo()+"");
-            intent.putExtra("p_des", listreclamo.get(position).getDescMotivo()+"");
-            intent.putExtra("p_sus", listreclamo.get(position).getSustento()+"");
+          Intent intent = new Intent(c, ActivityDetalleReclamo.class);
+          intent.putExtra("p_id", listreclamo.get(position).getId()+"");
+          intent.putExtra("p_pet", listreclamo.get(position).getPeticion()+"");
+          intent.putExtra("p_res", listreclamo.get(position).getCodReserva()+"");
+          intent.putExtra("p_fec", listreclamo.get(position).getFecha()+"");
+          intent.putExtra("p_ced", listreclamo.get(position).getCentroD()+"");
+          intent.putExtra("p_med", listreclamo.get(position).getMedioContacto()+"");
+          intent.putExtra("p_con", listreclamo.get(position).getContacto()+"");
+          intent.putExtra("p_cor", listreclamo.get(position).getCorreo()+"");
+          intent.putExtra("p_mot", listreclamo.get(position).getMotivo()+"");
+          intent.putExtra("p_des", listreclamo.get(position).getDescMotivo()+"");
+          intent.putExtra("p_sus", listreclamo.get(position).getSustento()+"");
 
 
             c.startActivity(intent);

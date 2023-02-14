@@ -195,7 +195,7 @@ public class Reclamo_Activity extends AppCompatActivity {
         AlertDialog.Builder ventana = new AlertDialog.Builder(this);
         ventana.setTitle("MENSAJE INF");
         ventana.setMessage(mensaje);
-        ventana.setPositiveButton("Aceptar", (dialog, which) -> {
+        ventana.setPositiveButton("Aceptar", (dialogInterface, i) -> {
                     Intent in = new Intent(this, ActivityListarReclamo.class);
                     startActivity(in);
                 }

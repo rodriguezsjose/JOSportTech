@@ -16,16 +16,15 @@ public class ActivityDetalleProveedor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalle_proveedor);
         asignaReferencias();
-        verificarEditar();
+        agregarDatos();
     }
-    private void verificarEditar() {
-        if (getIntent().hasExtra("p_id")) {
-            txtNom.setText(getIntent().getStringExtra("p_nom"));
-        }
+    private void agregarDatos() {
+    txtNom.setText(getIntent().getStringExtra("p_nom"));
+
     }
 
     private void asignaReferencias() {
-       // txtNom = findViewById(R.id.txtNombreprove);
+       txtNom = findViewById(R.id.txtNombreProv);
 
 
 
