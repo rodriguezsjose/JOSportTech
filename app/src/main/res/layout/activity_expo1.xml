@@ -73,7 +73,8 @@
         android:layout_height="93dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/wsp100" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:src="@drawable/wsp100" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
