@@ -10,6 +10,7 @@ import android.speech.RecognizerIntent;
 import android.telephony.SmsManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -71,6 +72,8 @@ public class ContactanosActivity extends AppCompatActivity {
             ArrayList<String> arrayList = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             String voice = arrayList.get(0);
             etMsj.setText(voice);
+        }else{
+            Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show();
         }
     }
 }

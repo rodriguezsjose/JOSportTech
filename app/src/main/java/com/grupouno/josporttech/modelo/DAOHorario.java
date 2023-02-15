@@ -70,7 +70,9 @@ public class DAOHorario {
         List<Horario> listaHorario = new ArrayList<>();
         try{
             String[] selectionArgs = {String.valueOf(idSede), String.valueOf(idDeporte)};
-            Cursor c = db.rawQuery("SELECT id, idSede, idDeporte, fechaIni, horaIni, fechaFin, horaFin, cantidad, aforo, disponibilidad " +
+//            Cursor c = db.rawQuery("SELECT id, idSede, idDeporte, fechaIni, horaIni, fechaFin, horaFin, cantidad, aforo, disponibilidad " +
+//                    " FROM horario WHERE idSede = ? AND idDeporte = ?",selectionArgs);
+            Cursor c = db.rawQuery("SELECT DISTINCT 0, 0, 0, fechaIni, null, null, null, 0, 0, 0 " +
                     " FROM horario WHERE idSede = ? AND idDeporte = ?",selectionArgs);
             while(c.moveToNext()) {
                 Horario horario = new Horario(c.getInt(0), c.getInt(1), c.getInt(2),c.getString(3),c.getString(4),c.getString(5),c.getString(6), c.getInt(7), c.getInt(8), c.getInt(9));
@@ -86,7 +88,9 @@ public class DAOHorario {
         List<Horario> listaHorario = new ArrayList<>();
         try{
             String[] selectionArgs = {String.valueOf(idSede), String.valueOf(idDeporte), fecha};
-            Cursor c = db.rawQuery("SELECT id, idSede, idDeporte, fechaIni, horaIni, fechaFin, horaFin, cantidad, aforo, disponibilidad " +
+//            Cursor c = db.rawQuery("SELECT id, idSede, idDeporte, fechaIni, horaIni, fechaFin, horaFin, cantidad, aforo, disponibilidad " +
+//                    " FROM horario WHERE idSede = ? AND idDeporte = ? AND fechaIni = ?",selectionArgs);
+            Cursor c = db.rawQuery("SELECT id, 0, 0, null, horaIni, null, null, 0, 0, 0 " +
                     " FROM horario WHERE idSede = ? AND idDeporte = ? AND fechaIni = ?",selectionArgs);
             while(c.moveToNext()) {
                 Horario horario = new Horario(c.getInt(0), c.getInt(1), c.getInt(2),c.getString(3),c.getString(4),c.getString(5),c.getString(6), c.getInt(7), c.getInt(8), c.getInt(9));

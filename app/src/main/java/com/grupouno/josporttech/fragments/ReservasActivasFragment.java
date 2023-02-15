@@ -92,12 +92,19 @@ public class ReservasActivasFragment extends Fragment {
 
         return view;
     }
-    private void mostrarReservas() {
-        listaReservas = daoReserva.obtenerListaReserva("ACTIVO");
-        adaptador = new AdaptadorListarReserva(globalContext, listaReservas);
-        rvReserva.setAdapter(adaptador);
-        rvReserva.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        asignarReferencias();
+        daoReserva.abrirBD();
+        if (mParam1 == null){
+            mostrarReservas();
+        }else{
+            buscarReservaVoz();
+        }
     }
+
     private void asignarReferencias(){
         btnNuevo = getView().findViewById(R.id.btnNuevo);
         btnNuevo.setOnClickListener(view -> {
@@ -107,11 +114,20 @@ public class ReservasActivasFragment extends Fragment {
         rvReserva = getView().findViewById(R.id.rvReserva);
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        asignarReferencias();
-        daoReserva.abrirBD();
-        mostrarReservas();
+    private void mostrarReservas() {
+        listaReservas = daoReserva.obtenerListaReserva("ACTIVO");
+        adaptador = new AdaptadorListarReserva(globalContext, listaReservas);
+        rvReserva.setAdapter(adaptador);
+        rvReserva.setLayoutManager(new LinearLayoutManager(getActivity()));
+    }
+
+    public void buscarReservaVoz(){
+        listaReservas.clear();
+        listaReservas = daoReserva.obtenerListaReserva("ACTIVA");
+        adaptador = new AdaptadorListarReserva(globalContext, listaReservas);
+
+        //adaptador.updateReceiptsList(daoReserva.obtenerListaReserva("ACTIVA"));
+        rvReserva.setAdapter(adaptador);
+        rvReserva.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
 }

@@ -35,5 +35,17 @@
         android:layout_height="match_parent"
         android:id="@+id/view_pager"
         android:layout_below="@id/tab_layout"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnMicrofono"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignBottom="@id/view_pager"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="24dp"
+        android:baselineAlignBottom="false"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_baseline_mic_24"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </RelativeLayout>
