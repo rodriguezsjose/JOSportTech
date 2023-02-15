@@ -673,6 +673,7 @@ public class ReservaActivity extends AppCompatActivity {
 
         btnAccion.setOnClickListener(view -> {
             String mensajeBoton;
+            AlertDialog.Builder ventana = new AlertDialog.Builder(this);
             switch (Accion)
             {
                 case 1: //REGISTRO
@@ -683,19 +684,40 @@ public class ReservaActivity extends AppCompatActivity {
                         break;
                     }
                 case 3: //REPROGRAMAR
-                    daoReserva.abrirBD();
-                    mensajeBoton = daoReserva.reprogramarReserva(idReservaDetalle,fechaFiltro, horaFiltro);
-                    mostrarMensaje(mensajeBoton);
+                    ventana.setTitle("Confirmación");
+                    ventana.setMessage("¿Desea reprogramar la reserva?");
+                    ventana.setNegativeButton("NO", null);
+                    ventana.setPositiveButton("SI",(dialogInterface,i) -> {
+                        daoReserva.abrirBD();
+                        String mensaje = daoReserva.reprogramarReserva(idReservaDetalle,fechaFiltro, horaFiltro);
+                        mostrarMensaje(mensaje);
+                    });
+                    ventana.create().show();
+
                     break;
                 case 4: //PAGAR
-                    daoReserva.abrirBD();
-                    mensajeBoton = daoReserva.pagarReserva(idReservaDetalle);
-                    mostrarMensaje(mensajeBoton);
+                    ventana.setTitle("Confirmación");
+                    ventana.setMessage("¿Desea pagar la reserva?");
+                    ventana.setNegativeButton("NO", null);
+                    ventana.setPositiveButton("SI",(dialogInterface,i) -> {
+                        daoReserva.abrirBD();
+                        String mensaje = daoReserva.pagarReserva(idReservaDetalle);
+                        mostrarMensaje(mensaje);
+                    });
+                    ventana.create().show();
+
                     break;
                 case 5: //ANULAR
-                    daoReserva.abrirBD();
-                    mensajeBoton = daoReserva.AnularReserva(idReservaDetalle, idMotivoAnulacionFiltro);
-                    mostrarMensaje(mensajeBoton);
+                    ventana.setTitle("Confirmación");
+                    ventana.setMessage("¿Desea anular la reserva?");
+                    ventana.setNegativeButton("NO", null);
+                    ventana.setPositiveButton("SI",(dialogInterface,i) -> {
+                        daoReserva.abrirBD();
+                        String mensaje = daoReserva.AnularReserva(idReservaDetalle, idMotivoAnulacionFiltro);
+                        mostrarMensaje(mensaje);
+                    });
+                    ventana.create().show();
+
                     break;
                 default:
             }
