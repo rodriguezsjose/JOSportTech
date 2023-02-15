@@ -40,15 +40,15 @@ public class ActivityDetalleReclamo extends AppCompatActivity {
 
 
     private void asignarReferencias() {
-            txtPeticion = findViewById(R.id.txtPet);
-            txtcodReserva = findViewById(R.id.txtCodRes);
-            txtfechaReserva = findViewById(R.id.txtFec);
-            txtCD = findViewById(R.id.txtCDe);
+            txtPeticion = findViewById(R.id.txtNombreCD);
+            txtcodReserva = findViewById(R.id.txtDirCD);
+            txtfechaReserva = findViewById(R.id.txtHorarioCD);
+            txtCD = findViewById(R.id.txtProvCD);
             //txtMedio = findViewById(R.id.txtTel);
             //txtContacto = findViewById(R.id.txtCont);
-            txtCorreo = findViewById(R.id.txtCor);
-            txtMotivo = findViewById(R.id.txtMot);
-            txtDescripcion = findViewById(R.id.txtDesc);
+            txtCorreo = findViewById(R.id.txtDisCD);
+            txtMotivo = findViewById(R.id.txtDeportesCD);
+            txtDescripcion = findViewById(R.id.txtServiciosCD);
          //   txtArchivoSustento = findViewById(R.id.txtAdj);
 
 

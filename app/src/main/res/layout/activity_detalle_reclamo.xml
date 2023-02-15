@@ -44,7 +44,7 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toStartOf="@+id/txtPet"
+        app:layout_constraintEnd_toStartOf="@+id/txtNombreCD"
         app:layout_constraintHorizontal_bias="0.702"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -121,7 +121,7 @@
         android:id="@+id/textView10"
         android:layout_width="123dp"
         android:layout_height="32dp"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="180dp"
         android:fontFamily="@font/tres"
         android:text="Lo que sucedió fue:"
         android:textColor="@color/black"
@@ -132,7 +132,7 @@
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/txtFec"
+        android:id="@+id/txtHorarioCD"
         android:layout_width="170dp"
         android:layout_height="38dp"
         android:layout_marginTop="20dp"
@@ -149,10 +149,10 @@
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCodRes" />
+        app:layout_constraintTop_toBottomOf="@+id/txtDirCD" />
 
     <EditText
-        android:id="@+id/txtCDe"
+        android:id="@+id/txtProvCD"
         android:layout_width="170dp"
         android:layout_height="38dp"
         android:layout_marginEnd="20dp"
@@ -165,10 +165,10 @@
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtFec" />
+        app:layout_constraintTop_toBottomOf="@+id/txtHorarioCD" />
 
     <EditText
-        android:id="@+id/txtCor"
+        android:id="@+id/txtDisCD"
         android:layout_width="170dp"
         android:layout_height="38dp"
         android:layout_marginEnd="20dp"
@@ -181,12 +181,12 @@
         android:textColorHint="#232222"
         android:textSize="16sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/txtMot"
+        app:layout_constraintBottom_toTopOf="@+id/txtDeportesCD"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtCDe" />
+        app:layout_constraintTop_toBottomOf="@+id/txtProvCD" />
 
     <EditText
-        android:id="@+id/txtPet"
+        android:id="@+id/txtNombreCD"
         android:layout_width="170dp"
         android:layout_height="38dp"
         android:layout_marginTop="40dp"
@@ -206,7 +206,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/txtCodRes"
+        android:id="@+id/txtDirCD"
         android:layout_width="170dp"
         android:layout_height="38dp"
         android:layout_marginTop="20dp"
@@ -224,14 +224,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/txtPet" />
+        app:layout_constraintTop_toBottomOf="@+id/txtNombreCD" />
 
     <EditText
-        android:id="@+id/txtMot"
+        android:id="@+id/txtDeportesCD"
         android:layout_width="170dp"
-        android:layout_height="50dp"
+        android:layout_height="35dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Motivo"
@@ -240,11 +240,11 @@
         android:textColorHint="#230202"
         android:textSize="16sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/txtDesc"
+        app:layout_constraintBottom_toTopOf="@+id/txtServiciosCD"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/txtDesc"
+        android:id="@+id/txtServiciosCD"
         android:layout_width="174dp"
         android:layout_height="95dp"
         android:layout_marginEnd="16dp"
