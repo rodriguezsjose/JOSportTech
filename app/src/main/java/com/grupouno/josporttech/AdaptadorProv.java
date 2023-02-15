@@ -37,9 +37,9 @@ public class AdaptadorProv extends RecyclerView.Adapter<AdaptadorProv.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.filaNombre.setText(listprov.get(position).getId()+"");
-        holder.filaDireccion.setText(listprov.get(position).getNom()+"");
-        holder.filaHorario.setText(listprov.get(position).getDir()+"");
+        holder.filaNombre.setText(listprov.get(position).getProv()+"");
+        holder.filaDireccion.setText(listprov.get(position).getDir()+"");
+        holder.filaHorario.setText(listprov.get(position).getNom()+"");
         //holder.btnVer.setOnClickListener(v -> {
         //   Intent intent = new Intent(c, ActivityDetalleReclamo.class);
         //  c.startActivity(intent);

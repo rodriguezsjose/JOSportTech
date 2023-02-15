@@ -21,12 +21,12 @@ public class ActivityDetalleProveedor extends AppCompatActivity {
     private void agregarDatos() {
     txtNom.setText(getIntent().getStringExtra("p_nom"));
     txtDir.setText(getIntent().getStringExtra("p_dir"));
-        txtDir.setText(getIntent().getStringExtra("p_hor"));
-        txtDir.setText(getIntent().getStringExtra("p_prov"));
-        txtDir.setText(getIntent().getStringExtra("p_dist"));
-        txtDir.setText(getIntent().getStringExtra("p_ref"));
-        txtDir.setText(getIntent().getStringExtra("p_dep"));
-        txtDir.setText(getIntent().getStringExtra("p_serv"));
+        txtHor.setText(getIntent().getStringExtra("p_hor"));
+        txtProv.setText(getIntent().getStringExtra("p_prov"));
+        txtDist.setText(getIntent().getStringExtra("p_dist"));
+      //  txtRef.setText(getIntent().getStringExtra("p_ref"));
+        txtDep.setText(getIntent().getStringExtra("p_dep"));
+        txtServ.setText(getIntent().getStringExtra("p_serv"));
 
     }
 
@@ -36,7 +36,7 @@ public class ActivityDetalleProveedor extends AppCompatActivity {
        txtHor = findViewById(R.id.txtHorarioCD);
        txtProv = findViewById(R.id.txtProvCD);
        txtDist = findViewById(R.id.txtDisCD);
-       txtRef = findViewById(R.id.txtRef);
+      // txtRef = findViewById(R.id.txtRe);
        txtDep = findViewById(R.id.txtDeportesCD) ;
        txtServ = findViewById(R.id.txtServiciosCD);
 
