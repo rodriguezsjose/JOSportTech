@@ -25,7 +25,7 @@ public class ActivityListarProv extends AppCompatActivity {
         setContentView(R.layout.activity_listar_prov);
         asignarReferencias();
         daoProv.abriBD();
-       //mostrarProv();
+       mostrarProv();
 
     }
 
