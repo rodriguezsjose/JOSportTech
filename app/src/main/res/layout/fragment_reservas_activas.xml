@@ -6,6 +6,7 @@
     android:id="@+id/frgReservaActiva"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo10"
     tools:context=".fragments.ReservasActivasFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
