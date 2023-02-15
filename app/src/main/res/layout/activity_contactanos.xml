@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactanosActivity">
+    tools:context=".ContactanosActivity"
+    android:orientation="vertical"
+    android:background="@drawable/f1">
 
     <Button
         android:id="@+id/botonenviar"
@@ -19,8 +21,8 @@
 
     <EditText
         android:id="@+id/texto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="181dp"
         android:layout_marginTop="164dp"
         android:ems="10"
         android:inputType="textPersonName"
