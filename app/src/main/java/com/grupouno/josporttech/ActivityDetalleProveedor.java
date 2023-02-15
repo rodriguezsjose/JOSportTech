@@ -6,7 +6,8 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ActivityDetalleProveedor extends AppCompatActivity {
-    EditText txtNom, txtDir, txtHor, txtProv, txtDist, txtRef, txtDep, txtServ, txtGal;
+    EditText txtNom;
+            //txtDir, txtHor, txtProv, txtDist, txtRef, txtDep, txtServ, txtGal;
 
     Proveedor p;
     DAOProv prov = new DAOProv(this);
@@ -24,7 +25,7 @@ public class ActivityDetalleProveedor extends AppCompatActivity {
     }
 
     private void asignaReferencias() {
-       txtNom = findViewById(R.id.txtNombreProv);
+       txtNom = findViewById(R.id.txtNombreCD);
 
 
 
