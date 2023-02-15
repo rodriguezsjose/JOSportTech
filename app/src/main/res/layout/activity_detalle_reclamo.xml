@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityDetalleReclamo"
-    android:padding="20dp"
+    android:background="@drawable/fondo10"
     android:orientation="vertical"
-    android:background="@drawable/fondo10">
+    android:padding="20dp"
+    tools:context=".ActivityDetalleReclamo"
+    tools:layout_editor_absoluteX="26dp"
+    tools:layout_editor_absoluteY="82dp">
 
 
     <TextView
@@ -99,8 +101,6 @@
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView9"
-        app:layout_constraintEnd_toStartOf="@+id/txtCor"
-        app:layout_constraintHorizontal_bias="0.093"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
@@ -137,8 +137,8 @@
         android:id="@+id/txtFec"
         android:layout_width="170dp"
         android:layout_height="38dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:editable="false"
         android:ems="10"
         android:enabled="false"
@@ -150,7 +150,6 @@
         android:textColorHint="#0C0C0C"
         android:textSize="16sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/txtCDe"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtCodRes" />
 
@@ -167,7 +166,6 @@
         android:textColorHint="#1B1A1A"
         android:textSize="16sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toTopOf="@+id/txtCor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtFec" />
 
@@ -175,7 +173,7 @@
         android:id="@+id/txtCor"
         android:layout_width="170dp"
         android:layout_height="38dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:gravity="center"
@@ -186,14 +184,15 @@
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/txtMot"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtCDe" />
 
     <EditText
         android:id="@+id/txtPet"
         android:layout_width="170dp"
         android:layout_height="38dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="20dp"
         android:editable="false"
         android:ems="10"
         android:enabled="false"
@@ -212,7 +211,7 @@
         android:id="@+id/txtCodRes"
         android:layout_width="170dp"
         android:layout_height="38dp"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="20dp"
         android:editable="false"
         android:ems="10"
         android:enabled="false"
@@ -225,15 +224,16 @@
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
+        app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPet" />
 
     <EditText
         android:id="@+id/txtMot"
         android:layout_width="170dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="48dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Motivo"
@@ -243,15 +243,13 @@
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/txtDesc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView9" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
         android:id="@+id/txtDesc"
         android:layout_width="174dp"
         android:layout_height="95dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="140dp"
         android:ems="10"
         android:enabled="false"
         android:gravity="center"
@@ -261,23 +259,7 @@
         android:textColorHint="#290505"
         android:textSize="16sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="117dp"
-        android:layout_height="176dp"
-        android:layout_marginStart="-20dp"
-        android:layout_marginTop="-40dp"
-        android:layout_marginEnd="-25dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/jo" />
+        tools:layout_editor_absoluteY="457dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
